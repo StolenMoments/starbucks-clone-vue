@@ -1,10 +1,13 @@
 <template>
-  <h1>초기화</h1>
+  <LoginForm/>
 </template>
 
 <script>
+import LoginForm from '@/components/Login/LoginForm.vue';
+
 export default {
   name: 'App',
-  components: {},
+  components: { LoginForm },
 };
+
 </script>
