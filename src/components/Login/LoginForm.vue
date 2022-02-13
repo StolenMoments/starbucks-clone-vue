@@ -9,6 +9,8 @@
         <input id="user-password" type="password" data-test="input-password" v-model="password">
       </label>
     </form>
+
+    <button type="submit">로그인</button>
   </div>
 
   <div>
