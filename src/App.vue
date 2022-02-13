@@ -1,15 +1,15 @@
 <template>
   <LoginForm/>
-  <MenuWrapper/>
+  <MenuFooterBar/>
 </template>
 
 <script>
 import LoginForm from '@/components/Login/LoginForm.vue';
-import MenuWrapper from '@/components/Menu/MenuWrapper.vue';
+import MenuFooterBar from '@/components/Menu/MenuFooterBar.vue';
 
 export default {
   name: 'App',
-  components: { MenuWrapper, LoginForm },
+  components: { MenuFooterBar, LoginForm },
 };
 
 </script>

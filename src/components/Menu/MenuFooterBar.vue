@@ -19,7 +19,7 @@
 import { HomeIcon, ShoppingCartIcon, CogIcon } from '@heroicons/vue/solid';
 
 export default {
-  name: 'MenuWrapper',
+  name: 'MenuFooterBar',
   components: {
     HomeIcon,
     ShoppingCartIcon,
