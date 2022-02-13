@@ -12,7 +12,7 @@
       </label>
     </div>
     <button class="bg-blue-300 hover:bg-blue-400 px-4 py-2 mt-1 mb-1 text-white font-bold rounded"
-            type="submit">
+            type="button">
       로그인
     </button>
     <div>
