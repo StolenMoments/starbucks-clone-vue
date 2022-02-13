@@ -12,8 +12,14 @@
   </div>
 
   <div>
-    <p data-test="show-id">{{ id }}</p>
-    <p data-test="show-password">{{ password }}</p>
+    <div>
+      <span>아이디:</span>
+      <span data-test="show-id">{{ id }}</span>
+    </div>
+    <div>
+      <span>패스워드:</span>
+      <span data-test="show-password">{{ password }}</span>
+    </div>
   </div>
 </template>
 
