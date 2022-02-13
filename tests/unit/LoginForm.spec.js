@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import LoginForm from '../../src/components/Login/LoginForm.vue';
 
-test('show id', async () => {
+test('입력한 아이디를 보여준다.', async () => {
   const wrapper = mount(LoginForm);
   const inputId = wrapper.get('[data-test="input-id"]');
   const showId = wrapper.get('[data-test="show-id"]');
@@ -11,7 +11,7 @@ test('show id', async () => {
     .toBe('user1234');
 });
 
-test('show password', async () => {
+test('입력한 패스워드를 보여준다.', async () => {
   const wrapper = mount(LoginForm);
   const inputPassword = wrapper.get('[data-test="input-password"]');
   const showPassword = wrapper.get('[data-test="show-password"]');
