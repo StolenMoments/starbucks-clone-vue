@@ -1,6 +1,6 @@
 <template>
   <main>
-    <LoginForm/>
+    <DrinkDetail/>
   </main>
   <footer>
     <MenuFooterBar/>
@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import LoginForm from '@/components/Login/LoginForm.vue';
 import MenuFooterBar from '@/components/Menu/MenuFooterBar.vue';
+import DrinkDetail from '@/components/product/DrinkDetail.vue';
 
 export default {
   name: 'App',
   components: {
+    DrinkDetail,
     MenuFooterBar,
-    LoginForm,
   },
 };
 
