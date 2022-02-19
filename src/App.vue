@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="pb-16">
     <DrinkDetail/>
   </main>
   <footer>
