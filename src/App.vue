@@ -1,6 +1,10 @@
 <template>
-  <LoginForm/>
-  <MenuFooterBar/>
+  <main>
+    <LoginForm/>
+  </main>
+  <footer>
+    <MenuFooterBar/>
+  </footer>
 </template>
 
 <script>
@@ -9,7 +13,10 @@ import MenuFooterBar from '@/components/Menu/MenuFooterBar.vue';
 
 export default {
   name: 'App',
-  components: { MenuFooterBar, LoginForm },
+  components: {
+    MenuFooterBar,
+    LoginForm,
+  },
 };
 
 </script>
