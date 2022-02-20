@@ -69,8 +69,10 @@
         <span class="mr-2 ml-2">1</span>
         <PlusCircleIcon class="inline h-7 w-7 cursor-pointer"/>
       </div>
-      <span class="ml-auto text-2xl">5,000</span>
-      <span class="ml-auto text-2xl">원</span>
+      <p class="ml-auto text-2xl">
+        <span>5,000</span>
+        <span>원</span>
+      </p>
     </section>
     <section class="mt-4 flex w-full max-w-sm">
       <HeartIcon class="inline h-7 w-7 cursor-pointer"/>
