@@ -116,6 +116,11 @@ export default {
       },
     };
   },
+  methods: {
+    addComma(price) {
+      return price.toLocaleString('ko-KR');
+    },
+  },
 };
 </script>
 
