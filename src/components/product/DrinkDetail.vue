@@ -1,7 +1,13 @@
 <template>
   <main class="flex h-full w-full flex-col place-content-evenly items-center">
-    <section>
+    <section class="relative">
+      <button class="absolute h-6 w-6 top-2 left-2 rounded-xl bg-gray-200">
+        <ArrowCircleLeftIcon/>
+      </button>
       <img alt="coffee" class="h-80 w-full max-w-sm" src="@/assets/coffee_sample.jpeg"/>
+      <button class="absolute h-6 w-6 top-2 right-2 rounded-xl bg-gray-200">
+        <ShareIcon/>
+      </button>
     </section>
     <section class="mt-4 flex w-full max-w-sm">
       <span class="text-2xl font-bold">카페 라떼</span>
@@ -72,8 +78,12 @@
 </template>
 
 <script>
-import { PlusCircleIcon, MinusCircleIcon } from '@heroicons/vue/outline';
-import { HeartIcon } from '@heroicons/vue/solid';
+import {
+  PlusCircleIcon,
+  MinusCircleIcon,
+  ArrowCircleLeftIcon,
+} from '@heroicons/vue/outline';
+import { HeartIcon, ShareIcon } from '@heroicons/vue/solid';
 
 export default {
   name: 'DrinkDetail',
@@ -81,6 +91,8 @@ export default {
     PlusCircleIcon,
     MinusCircleIcon,
     HeartIcon,
+    ArrowCircleLeftIcon,
+    ShareIcon,
   },
 };
 </script>
