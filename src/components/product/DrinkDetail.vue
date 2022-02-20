@@ -100,6 +100,21 @@ export default {
     ArrowCircleLeftIcon,
     ShareIcon,
   },
+  data() {
+    return {
+      drink: {
+        name: '카페 라떼',
+        price: 5000,
+        desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+        size: ['Short', 'Tall', 'Grande', 'Venti'],
+        options: [
+          {
+            name: '에스프레소 샷',
+            price: 500,
+          }],
+      },
+    };
+  },
 };
 </script>
 
