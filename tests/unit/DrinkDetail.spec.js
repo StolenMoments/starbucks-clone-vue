@@ -274,7 +274,7 @@ describe('총 금액 계산', () => {
 
   test('1개 주문', () => {
     const totalPrice = wrapper.get('[data-test="personal-option-name"]');
-    const orderCount = wrapper.get('[data-test="total-count"]');
+    const orderCount = wrapper.get('[data-test="order-count"]');
 
     expect(orderCount.text())
       .toEqual(1);
@@ -285,7 +285,7 @@ describe('총 금액 계산', () => {
 
   test('3개 주문', () => {
     const totalPrice = wrapper.get('[data-test="total-price"]');
-    const orderCount = wrapper.get('[data-test="total-count"]');
+    const orderCount = wrapper.get('[data-test="order-count"]');
 
     expect(orderCount.text())
       .toEqual(3);
@@ -296,7 +296,7 @@ describe('총 금액 계산', () => {
 
   test('3개 주문 + 옵션 1개 더 추가', () => {
     const totalPrice = wrapper.get('[data-test="total-price"]');
-    const orderCount = wrapper.get('[data-test="total-count"]');
+    const orderCount = wrapper.get('[data-test="order-count"]');
 
     expect(orderCount.text())
       .toEqual(3);
