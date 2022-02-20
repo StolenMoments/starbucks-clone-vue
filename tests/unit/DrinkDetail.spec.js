@@ -9,7 +9,12 @@ test('음료 이름을 보여준다.', () => {
           name: '카페 라떼',
           price: 5000,
           desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: ['Short', 'Tall', 'Grande', 'Venti'],
+          size: {
+            Short: true,
+            Tall: true,
+            Grande: true,
+            Venti: false,
+          },
           options: [
             {
               name: '에스프레소 샷',
@@ -33,7 +38,12 @@ test('음료 설명을 보여준다.', () => {
           name: '카페 라떼',
           price: 5000,
           desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: ['Short', 'Tall', 'Grande', 'Venti'],
+          size: {
+            Short: true,
+            Tall: true,
+            Grande: true,
+            Venti: false,
+          },
           options: [
             {
               name: '에스프레소 샷',
@@ -59,7 +69,12 @@ test('음료 가격을 보여준다.', () => {
           name: '카페 라떼',
           price: 5000,
           desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: ['Short', 'Tall', 'Grande', 'Venti'],
+          size: {
+            Short: true,
+            Tall: true,
+            Grande: true,
+            Venti: false,
+          },
           options: [
             {
               name: '에스프레소 샷',
@@ -83,7 +98,12 @@ test('HOT 버튼을 보여준다.', () => {
           name: '카페 라떼',
           price: 5000,
           desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: ['Short', 'Tall', 'Grande', 'Venti'],
+          size: {
+            Short: true,
+            Tall: true,
+            Grande: true,
+            Venti: false,
+          },
           options: [
             {
               name: '에스프레소 샷',
@@ -110,7 +130,12 @@ test('ICE 버튼을 보여준다.', () => {
           name: '카페 라떼',
           price: 5000,
           desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: ['Short', 'Tall', 'Grande', 'Venti'],
+          size: {
+            Short: true,
+            Tall: true,
+            Grande: true,
+            Venti: false,
+          },
           options: [
             {
               name: '에스프레소 샷',
@@ -168,7 +193,12 @@ describe('컵 옵션 3가지', () => {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            size: ['Short', 'Tall', 'Grande', 'Venti'],
+            size: {
+              Short: true,
+              Tall: true,
+              Grande: true,
+              Venti: false,
+            },
             options: [
               {
                 name: '에스프레소 샷',
@@ -226,7 +256,12 @@ describe('음료 퍼스널 옵션', () => {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            size: ['Short', 'Tall', 'Grande', 'Venti'],
+            size: {
+              Short: true,
+              Tall: true,
+              Grande: true,
+              Venti: false,
+            },
             options: [
               {
                 name: '에스프레소 샷',
@@ -279,7 +314,12 @@ describe('총 금액 계산', () => {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            size: ['Short', 'Tall', 'Grande', 'Venti'],
+            size: {
+              Short: true,
+              Tall: true,
+              Grande: true,
+              Venti: false,
+            },
             options: [
               {
                 name: '에스프레소 샷',
@@ -352,7 +392,12 @@ describe('즐겨찾기, 담기, 주문하기 버튼', () => {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            size: ['Short', 'Tall', 'Grande', 'Venti'],
+            size: {
+              Short: true,
+              Tall: true,
+              Grande: true,
+              Venti: false,
+            },
             options: [
               {
                 name: '에스프레소 샷',
