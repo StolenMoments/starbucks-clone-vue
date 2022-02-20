@@ -273,7 +273,7 @@ describe('총 금액 계산', () => {
   });
 
   test('1개 주문', () => {
-    const totalPrice = wrapper.get('[data-test="personal-option-name"]');
+    const totalPrice = wrapper.get('[data-test="total-price"]');
     const orderCount = wrapper.get('[data-test="order-count"]');
 
     expect(orderCount.text())
