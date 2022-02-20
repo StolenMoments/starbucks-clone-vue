@@ -177,6 +177,10 @@ describe('컵 옵션 3가지', () => {
     },
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('매장컵 버튼을 보여준다.', () => {
     const storeCupButton = wrapper.get('[data-test="store-cup"]');
 
@@ -221,10 +225,15 @@ describe('음료 퍼스널 옵션', () => {
             {
               name: '에스프레소 샷',
               price: 500,
+              count: 1,
             }],
         },
       };
     },
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   test('퍼스널 옵션 내용', () => {
@@ -241,15 +250,14 @@ describe('음료 퍼스널 옵션', () => {
       .toBe('500');
   });
 
-  test('퍼스널 옵션 1개 추가', () => {
-    const personalOptionPrice = wrapper.get('[data-test="personal-option-price"]');
+  test('퍼스널 옵션 1개 추가', async () => {
     const personalOptionCount = wrapper.get('[data-test="personal-option-count"]');
+    const addOptionCount = wrapper.get('[data-test="add-option-count"]');
 
+    await addOptionCount.trigger('click');
+    await wrapper.vm.$nextTick();
     expect(Number(personalOptionCount.text()))
       .toEqual(2);
-
-    expect(personalOptionPrice.text())
-      .toBe('1,000');
   });
 });
 
@@ -266,10 +274,15 @@ describe('총 금액 계산', () => {
             {
               name: '에스프레소 샷',
               price: 500,
+              count: 1,
             }],
         },
       };
     },
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   test('1개 주문', () => {
@@ -283,9 +296,15 @@ describe('총 금액 계산', () => {
       .toBe('5,000');
   });
 
-  test('3개 주문', () => {
+  test('3개 주문', async () => {
     const totalPrice = wrapper.get('[data-test="total-price"]');
     const orderCount = wrapper.get('[data-test="order-count"]');
+    const addOrderCount = wrapper.get('[data-test="add-order-count"]');
+
+    await addOrderCount.trigger('click');
+    await addOrderCount.trigger('click');
+
+    await wrapper.vm.$nextTick();
 
     expect(Number(orderCount.text()))
       .toEqual(3);
@@ -294,10 +313,16 @@ describe('총 금액 계산', () => {
       .toBe('15,000');
   });
 
-  test('3개 주문 + 옵션 1개 더 추가', () => {
+  test('3개 주문 + 옵션 1개 더 추가', async () => {
     const totalPrice = wrapper.get('[data-test="total-price"]');
     const orderCount = wrapper.get('[data-test="order-count"]');
+    const addOrderCount = wrapper.get('[data-test="add-order-count"]');
+    const addOptionCount = wrapper.get('[data-test="add-option-count"]');
 
+    await addOrderCount.trigger('click');
+    await addOrderCount.trigger('click');
+    await addOptionCount.trigger('click');
+    await wrapper.vm.$nextTick();
     expect(Number(orderCount.text()))
       .toEqual(3);
 
@@ -308,6 +333,9 @@ describe('총 금액 계산', () => {
 
 describe('즐겨찾기, 담기, 주문하기 버튼', () => {
   const wrapper = shallowMount(DrinkDetail);
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   test('즐겨찾기 버튼이 보여진다.', () => {
     const favorite = wrapper.get('[data-test="favorite"]');

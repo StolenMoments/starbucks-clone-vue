@@ -66,7 +66,9 @@
         <p class="mr-auto" data-test="personal-option-name">{{ option.name }}</p>
         <div class="ml-auto">
           <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
-                           @click="option.count > 1 ? option.count -= 1 : '' "/>
+                           @click="option.count > 1 ? option.count -= 1 : '' "
+                           data-test="subtract-option-count"
+          />
           <span class="mr-2 ml-2" data-test="personal-option-count">{{ option.count }}</span>
           <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
                           @click="option.count += 1"
@@ -78,9 +80,13 @@
     <hr class="mt-2 w-full max-w-sm border-t-4"/>
     <section class="mt-4 flex w-full max-w-sm">
       <div class="mr-auto">
-        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="subtractOrderCount"/>
+        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="subtractOrderCount"
+                         data-test="subtract-order-count"
+        />
         <span class="mr-2 ml-2" data-test="order-count">{{ orderCount }}</span>
-        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="addOrderCount"/>
+        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="addOrderCount"
+                        data-test="add-order-count"
+        />
       </div>
       <p class="ml-auto text-2xl">
         <span data-test="total-price">{{ addComma(getTotalPrice) }}</span>
