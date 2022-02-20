@@ -39,10 +39,30 @@
     <section class="mt-4 w-full max-w-sm">
       <p class="font-bold">사이즈</p>
       <div class="flex place-content-between">
-        <button class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Short</button>
-        <button class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Tall</button>
-        <button class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Grande</button>
-        <button class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Venti</button>
+        <button v-if="drink.size.Short"
+                class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Short
+        </button>
+        <button v-else
+                class="h-10 w-24 cursor-auto rounded border-2 text-gray-200">Short
+        </button>
+        <button v-if="drink.size.Tall"
+                class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Tall
+        </button>
+        <button v-else
+                class="h-10 w-24 cursor-auto rounded border-2 text-gray-200">Tall
+        </button>
+        <button v-if="drink.size.Grande"
+                class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Grande
+        </button>
+        <button v-else
+                class="h-10 w-24 cursor-auto rounded border-2 text-gray-200">Grande
+        </button>
+        <button v-if="drink.size.Venti"
+                class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Venti
+        </button>
+        <button v-else
+                class="h-10 w-24 cursor-auto rounded border-2 text-gray-200">Venti
+        </button>
       </div>
     </section>
     <section class="mt-4 w-full max-w-sm">
@@ -128,7 +148,12 @@ export default {
         name: '카페 라떼',
         price: 5000,
         desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-        size: ['Short', 'Tall', 'Grande', 'Venti'],
+        size: {
+          Short: true,
+          Tall: true,
+          Grande: true,
+          Venti: false,
+        },
         options: [
           {
             name: '에스프레소 샷',
