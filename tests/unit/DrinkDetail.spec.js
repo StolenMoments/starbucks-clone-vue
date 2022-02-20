@@ -159,22 +159,26 @@ describe('음료 사이즈 종류', () => {
 });
 
 describe('컵 옵션 3가지', () => {
-  const wrapper = shallowMount(DrinkDetail, {
-    data() {
-      return {
-        drink: {
-          name: '카페 라떼',
-          price: 5000,
-          desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: ['Short', 'Tall', 'Grande', 'Venti'],
-          options: [
-            {
-              name: '에스프레소 샷',
-              price: 500,
-            }],
-        },
-      };
-    },
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallowMount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: ['Short', 'Tall', 'Grande', 'Venti'],
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+        };
+      },
+    });
   });
 
   afterEach(() => {
@@ -213,23 +217,26 @@ describe('컵 옵션 3가지', () => {
 });
 
 describe('음료 퍼스널 옵션', () => {
-  const wrapper = shallowMount(DrinkDetail, {
-    data() {
-      return {
-        drink: {
-          name: '카페 라떼',
-          price: 5000,
-          desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: ['Short', 'Tall', 'Grande', 'Venti'],
-          options: [
-            {
-              name: '에스프레소 샷',
-              price: 500,
-              count: 1,
-            }],
-        },
-      };
-    },
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallowMount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: ['Short', 'Tall', 'Grande', 'Venti'],
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+        };
+      },
+    });
   });
 
   afterEach(() => {
@@ -262,23 +269,27 @@ describe('음료 퍼스널 옵션', () => {
 });
 
 describe('총 금액 계산', () => {
-  const wrapper = shallowMount(DrinkDetail, {
-    data() {
-      return {
-        drink: {
-          name: '카페 라떼',
-          price: 5000,
-          desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: ['Short', 'Tall', 'Grande', 'Venti'],
-          options: [
-            {
-              name: '에스프레소 샷',
-              price: 500,
-              count: 1,
-            }],
-        },
-      };
-    },
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallowMount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: ['Short', 'Tall', 'Grande', 'Venti'],
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+        };
+      },
+    });
   });
 
   afterEach(() => {
@@ -332,7 +343,27 @@ describe('총 금액 계산', () => {
 });
 
 describe('즐겨찾기, 담기, 주문하기 버튼', () => {
-  const wrapper = shallowMount(DrinkDetail);
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallowMount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: ['Short', 'Tall', 'Grande', 'Venti'],
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+        };
+      },
+    });
+  });
   afterEach(() => {
     jest.clearAllMocks();
   });
