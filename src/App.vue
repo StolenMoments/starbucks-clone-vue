@@ -9,7 +9,7 @@
 
 <script>
 import MenuFooterBar from '@/components/Menu/MenuFooterBar.vue';
-import DrinkDetail from '@/components/product/DrinkDetail.vue';
+import DrinkDetail from '@/components/Drink/DrinkDetail.vue';
 
 export default {
   name: 'App',
