@@ -37,33 +37,8 @@
       </button>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <p class="font-bold">사이즈</p>
-      <div class="flex place-content-between">
-        <button v-if="drink.size.Short"
-                class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Short
-        </button>
-        <button v-else
-                class="h-10 w-24 cursor-auto rounded border-2 text-gray-200">Short
-        </button>
-        <button v-if="drink.size.Tall"
-                class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Tall
-        </button>
-        <button v-else
-                class="h-10 w-24 cursor-auto rounded border-2 text-gray-200">Tall
-        </button>
-        <button v-if="drink.size.Grande"
-                class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Grande
-        </button>
-        <button v-else
-                class="h-10 w-24 cursor-auto rounded border-2 text-gray-200">Grande
-        </button>
-        <button v-if="drink.size.Venti"
-                class="h-10 w-24 cursor-pointer rounded border-2 hover:bg-green-300">Venti
-        </button>
-        <button v-else
-                class="h-10 w-24 cursor-auto rounded border-2 text-gray-200">Venti
-        </button>
-      </div>
+      <DrinkDetailSize
+        v-bind:drinkSize="drink.size"/>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <p class="font-bold">컵 선택</p>
@@ -132,10 +107,12 @@ import {
   ArrowCircleLeftIcon,
 } from '@heroicons/vue/outline';
 import { HeartIcon, ShareIcon } from '@heroicons/vue/solid';
+import DrinkDetailSize from '@/components/product/DrinkDetailSizeButtons.vue';
 
 export default {
   name: 'DrinkDetail',
   components: {
+    DrinkDetailSize,
     PlusCircleIcon,
     MinusCircleIcon,
     HeartIcon,
