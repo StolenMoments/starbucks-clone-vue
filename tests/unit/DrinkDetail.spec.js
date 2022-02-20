@@ -1,5 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import DrinkDetail from '@/components/product/DrinkDetail.vue';
+import DrinkDetail from '@/components/Drink/DrinkDetail.vue';
 
 test('음료 이름을 보여준다.', () => {
   const wrapper = shallowMount(DrinkDetail, {
@@ -155,31 +155,182 @@ test('ICE 버튼을 보여준다.', () => {
 });
 
 describe('음료 사이즈 종류', () => {
-  test('4가지 사이즈 모두 가능한 케이스', () => {
-    // 1. 리스트에 있는 사이즈를 순회해서 버튼을 활성화 시킴
-    // 2. 활성화가 되었는지 테스트
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-    // 테스트 에러 발생으로 작성 보류
-    //   TypeError: Cannot read properties of null (reading 'classList')
-    //
-    //   141 |         const sizeButton = document.getElementById(validSize);
-    //   142 |         console.log(sizeButton);
-    // > 143 |         sizeButton.classList.remove('text-gray-200');
+  let wrapper;
+  const sizeList = ['Short', 'Tall', 'Grande', 'Venti'];
+  const isActive = (classList) => {
+    expect(classList.contains('cursor-pointer'))
+      .toBe(true);
+    expect(classList.contains('hover:bg-green-300'))
+      .toBe(true);
+    expect(classList.contains('cursor-auto'))
+      .toBe(false);
+    expect(classList.contains('text-gray-200'))
+      .toBe(false);
+  };
+  const isInactive = (classList) => {
+    expect(classList.contains('cursor-pointer'))
+      .toBe(false);
+    expect(classList.contains('hover:bg-green-300'))
+      .toBe(false);
+    expect(classList.contains('cursor-auto'))
+      .toBe(true);
+    expect(classList.contains('text-gray-200'))
+      .toBe(true);
+  };
+
+  test('4가지 사이즈 모두 가능한 케이스', () => {
+    wrapper = mount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: {
+              Short: true,
+              Tall: true,
+              Grande: true,
+              Venti: true,
+            },
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+        };
+      },
+    });
+
+    for (let i = 0; i < sizeList.length; i += 1) {
+      const sizeElement = wrapper.get(`[data-test="${sizeList[i]}"]`);
+
+      expect(sizeElement.text())
+        .toBe(sizeList[i]);
+      isActive(sizeElement.element.classList);
+    }
   });
 
   test('3가지 사이즈 가능한 케이스', () => {
-    // 1. 리스트에 있는 사이즈를 순회해서 버튼을 활성화 시킴
-    // 2. 활성화가 되었는지 테스트
+    wrapper = mount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: {
+              Short: true,
+              Tall: true,
+              Grande: true,
+              Venti: false,
+            },
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+        };
+      },
+    });
+
+    for (let i = 0; i < sizeList.length; i += 1) {
+      const sizeElement = wrapper.get(`[data-test="${sizeList[i]}"]`);
+
+      expect(sizeElement.text())
+        .toBe(sizeList[i]);
+
+      if (sizeList[i] === 'Venti') {
+        isInactive(sizeElement.element.classList);
+      } else {
+        isActive(sizeElement.element.classList);
+      }
+    }
   });
 
   test('2가지 사이즈 가능한 케이스', () => {
-    // 1. 리스트에 있는 사이즈를 순회해서 버튼을 활성화 시킴
-    // 2. 활성화가 되었는지 테스트
+    wrapper = mount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: {
+              Short: false,
+              Tall: true,
+              Grande: true,
+              Venti: false,
+            },
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+        };
+      },
+    });
+
+    for (let i = 0; i < sizeList.length; i += 1) {
+      const sizeElement = wrapper.get(`[data-test="${sizeList[i]}"]`);
+
+      expect(sizeElement.text())
+        .toBe(sizeList[i]);
+
+      if (sizeList[i] === 'Short' || sizeList[i] === 'Venti') {
+        isInactive(sizeElement.element.classList);
+      } else {
+        isActive(sizeElement.element.classList);
+      }
+    }
   });
 
   test('1가지 사이즈 가능한 케이스', () => {
-    // 1. 리스트에 있는 사이즈를 순회해서 버튼을 활성화 시킴
-    // 2. 활성화가 되었는지 테스트
+    wrapper = mount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: {
+              Short: false,
+              Tall: false,
+              Grande: true,
+              Venti: false,
+            },
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+        };
+      },
+    });
+
+    for (let i = 0; i < sizeList.length; i += 1) {
+      const sizeElement = wrapper.get(`[data-test="${sizeList[i]}"]`);
+
+      expect(sizeElement.text())
+        .toBe(sizeList[i]);
+
+      if (sizeList[i] === 'Grande') {
+        isActive(sizeElement.element.classList);
+      } else {
+        isInactive(sizeElement.element.classList);
+      }
+    }
   });
 });
 
