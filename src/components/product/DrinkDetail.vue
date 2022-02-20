@@ -23,8 +23,12 @@
       <p class="text-xl font-bold">5,000원</p>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <button class="h-10 w-1/2 cursor-pointer rounded-l-3xl border-2 hover:bg-red-300">HOT</button>
-      <button class="h-10 w-1/2 cursor-pointer rounded-r-3xl border-2 hover:bg-blue-300">
+      <button
+        class="h-10 w-1/2 cursor-pointer rounded-l-3xl border-2 hover:bg-red-300 hover:text-white">
+        HOT
+      </button>
+      <button
+        class="h-10 w-1/2 cursor-pointer rounded-r-3xl border-2 hover:bg-blue-300 hover:text-white">
         ICE
       </button>
     </section>
