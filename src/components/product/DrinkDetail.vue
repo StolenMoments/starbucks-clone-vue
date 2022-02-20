@@ -20,7 +20,8 @@
       </p>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <p class="text-xl font-bold">5,000원</p>
+      <span class="text-xl font-bold">5,000</span>
+      <span class="text-xl font-bold">원</span>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <button
@@ -69,7 +70,8 @@
         <span class="mr-2 ml-2">1</span>
         <PlusCircleIcon class="inline h-7 w-7 cursor-pointer"/>
       </div>
-      <p class="ml-auto text-2xl">5,000 원</p>
+      <span class="ml-auto text-2xl">5,000</span>
+      <span class="ml-auto text-2xl">원</span>
     </section>
     <section class="mt-4 flex w-full max-w-sm">
       <HeartIcon class="inline h-7 w-7 cursor-pointer"/>
