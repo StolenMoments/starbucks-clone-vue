@@ -10,25 +10,29 @@
       </button>
     </section>
     <section class="mt-4 flex w-full max-w-sm">
-      <span class="text-2xl font-bold">{{ drink.name }}</span>
+      <span class="text-2xl font-bold" data-test="drink-name">{{ drink.name }}</span>
       <span class="ml-1 text-xs text-pink-400">Best</span>
     </section>
-    <section class="mt-4 w-full max-w-sm">
+    <section class="mt-4 w-full max-w-sm" data-test="drink-desc">
       <p>
         {{ drink.desc }}
       </p>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <span class="text-xl font-bold">{{ addComma(drink.price) }}</span>
+      <span class="text-xl font-bold" data-test="drink-price">{{ addComma(drink.price) }}</span>
       <span class="text-xl font-bold">원</span>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <button
-        class="h-10 w-1/2 cursor-pointer rounded-l-3xl border-2 hover:bg-red-300 hover:text-white">
+        class="h-10 w-1/2 cursor-pointer rounded-l-3xl border-2 hover:bg-red-300 hover:text-white"
+        data-test="hot-button"
+      >
         HOT
       </button>
       <button
-        class="h-10 w-1/2 cursor-pointer rounded-r-3xl border-2 hover:bg-blue-300 hover:text-white">
+        class="h-10 w-1/2 cursor-pointer rounded-r-3xl border-2 hover:bg-blue-300 hover:text-white"
+        data-test="ice-button"
+      >
         ICE
       </button>
     </section>
@@ -43,43 +47,53 @@
     </section>
     <section class="mt-4 w-full max-w-sm">
       <p class="font-bold">컵 선택</p>
-      <button class="h-10 w-1/3 cursor-pointer rounded-l-2xl border-2 hover:bg-green-300">
-        매장컵
+      <button class="h-10 w-1/3 cursor-pointer rounded-l-2xl border-2 hover:bg-green-300"
+              data-test="store-cup"
+      >매장컵
       </button>
-      <button class="h-10 w-1/3 cursor-pointer rounded border-2 hover:bg-green-300">개인컵</button>
-      <button class="h-10 w-1/3 cursor-pointer rounded-r-2xl border-2 hover:bg-green-300">
-        일회용컵
+      <button class="h-10 w-1/3 cursor-pointer rounded border-2 hover:bg-green-300"
+              data-test="personal-cup"
+      >개인컵
+      </button>
+      <button class="h-10 w-1/3 cursor-pointer rounded-r-2xl border-2 hover:bg-green-300"
+              data-test="disposable-cup"
+      >일회용컵
       </button>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <p class="font-bold">퍼스널 옵션</p>
       <div class="mt-1 flex" v-for="option in drink.options" :key="option.name">
-        <p class="mr-auto">{{ option.name }}</p>
+        <p class="mr-auto" data-test="personal-option-name">{{ option.name }}</p>
         <div class="ml-auto">
           <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
                            @click="option.count > 1 ? option.count -= 1 : '' "/>
-          <span class="mr-2 ml-2">{{ option.count }}</span>
-          <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded" @click="option.count += 1"/>
+          <span class="mr-2 ml-2" data-test="personal-option-count">{{ option.count }}</span>
+          <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
+                          @click="option.count += 1"
+                          data-test="add-option-count"/>
         </div>
+        <p class="hidden" data-test="personal-option-price">{{ option.price }}</p>
       </div>
     </section>
     <hr class="mt-2 w-full max-w-sm border-t-4"/>
     <section class="mt-4 flex w-full max-w-sm">
       <div class="mr-auto">
         <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="subtractOrderCount"/>
-        <span class="mr-2 ml-2">{{ orderCount }}</span>
+        <span class="mr-2 ml-2" data-test="order-count">{{ orderCount }}</span>
         <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="addOrderCount"/>
       </div>
       <p class="ml-auto text-2xl">
-        <span>{{ addComma(getTotalPrice) }}</span>
+        <span data-test="total-price">{{ addComma(getTotalPrice) }}</span>
         <span>원</span>
       </p>
     </section>
     <section class="mt-4 flex w-full max-w-sm">
-      <HeartIcon class="inline h-7 w-7 cursor-pointer"/>
+      <HeartIcon class="inline h-7 w-7 cursor-pointer" data-test="favorite"/>
       <div class="ml-auto">
-        <button class="h-10 w-16 cursor-pointer rounded border-2">담기</button>
-        <button class="h-10 w-24 cursor-pointer rounded border-2 bg-green-400">주문하기</button>
+        <button class="h-10 w-16 cursor-pointer rounded border-2" data-test="add-cart">담기</button>
+        <button class="h-10 w-24 cursor-pointer rounded border-2 bg-green-400" data-test="do-order">
+          주문하기
+        </button>
       </div>
     </section>
   </main>
