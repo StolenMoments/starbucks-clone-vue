@@ -10,17 +10,16 @@
       </button>
     </section>
     <section class="mt-4 flex w-full max-w-sm">
-      <span class="text-2xl font-bold">카페 라떼</span>
+      <span class="text-2xl font-bold">{{ drink.name }}</span>
       <span class="ml-1 text-xs text-pink-400">Best</span>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <p>
-        풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝
-        얹은 대표적인 카페 라떼
+        {{ drink.desc }}
       </p>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <span class="text-xl font-bold">5,000</span>
+      <span class="text-xl font-bold">{{ drink.price }}</span>
       <span class="text-xl font-bold">원</span>
     </section>
     <section class="mt-4 w-full max-w-sm">
@@ -54,8 +53,8 @@
     </section>
     <section class="mt-4 w-full max-w-sm">
       <p class="font-bold">퍼스널 옵션</p>
-      <div class="mt-1 flex">
-        <p class="mr-auto">에스프레소 샷</p>
+      <div class="mt-1 flex" v-for="option in drink.options" :key="option.name">
+        <p class="mr-auto">{{ option.name }}</p>
         <div class="ml-auto">
           <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
           <span class="mr-2 ml-2">1</span>
