@@ -37,7 +37,7 @@
       </button>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <DrinkDetailSize
+      <DrinkDetailSizeButtons
         v-bind:drinkSize="drink.size"/>
     </section>
     <section class="mt-4 w-full max-w-sm">
@@ -107,12 +107,12 @@ import {
   ArrowCircleLeftIcon,
 } from '@heroicons/vue/outline';
 import { HeartIcon, ShareIcon } from '@heroicons/vue/solid';
-import DrinkDetailSize from '@/components/product/DrinkDetailSizeButtons.vue';
+import DrinkDetailSizeButtons from '@/components/product/DrinkDetailSizeButtons.vue';
 
 export default {
   name: 'DrinkDetail',
   components: {
-    DrinkDetailSize,
+    DrinkDetailSizeButtons,
     PlusCircleIcon,
     MinusCircleIcon,
     HeartIcon,
