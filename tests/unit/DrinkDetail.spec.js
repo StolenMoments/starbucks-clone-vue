@@ -19,8 +19,10 @@ test('음료 이름을 보여준다.', () => {
             {
               name: '에스프레소 샷',
               price: 500,
+              count: 1,
             }],
         },
+        orderCount: 1,
       };
     },
   });
@@ -48,8 +50,10 @@ test('음료 설명을 보여준다.', () => {
             {
               name: '에스프레소 샷',
               price: 500,
+              count: 1,
             }],
         },
+        orderCount: 1,
       };
     },
   });
@@ -79,8 +83,10 @@ test('음료 가격을 보여준다.', () => {
             {
               name: '에스프레소 샷',
               price: 500,
+              count: 1,
             }],
         },
+        orderCount: 1,
       };
     },
   });
@@ -108,8 +114,10 @@ test('HOT 버튼을 보여준다.', () => {
             {
               name: '에스프레소 샷',
               price: 500,
+              count: 1,
             }],
         },
+        orderCount: 1,
       };
     },
   });
@@ -140,8 +148,10 @@ test('ICE 버튼을 보여준다.', () => {
             {
               name: '에스프레소 샷',
               price: 500,
+              count: 1,
             }],
         },
+        orderCount: 1,
       };
     },
   });
@@ -203,6 +213,7 @@ describe('음료 사이즈 종류', () => {
                 count: 1,
               }],
           },
+          orderCount: 1,
         };
       },
     });
@@ -237,6 +248,7 @@ describe('음료 사이즈 종류', () => {
                 count: 1,
               }],
           },
+          orderCount: 1,
         };
       },
     });
@@ -276,6 +288,7 @@ describe('음료 사이즈 종류', () => {
                 count: 1,
               }],
           },
+          orderCount: 1,
         };
       },
     });
@@ -315,6 +328,7 @@ describe('음료 사이즈 종류', () => {
                 count: 1,
               }],
           },
+          orderCount: 1,
         };
       },
     });
@@ -357,6 +371,7 @@ describe('컵 옵션 3가지', () => {
                 count: 1,
               }],
           },
+          orderCount: 1,
         };
       },
     });
@@ -420,6 +435,7 @@ describe('음료 퍼스널 옵션', () => {
                 count: 1,
               }],
           },
+          orderCount: 1,
         };
       },
     });
@@ -478,6 +494,7 @@ describe('총 금액 계산', () => {
                 count: 1,
               }],
           },
+          orderCount: 1,
         };
       },
     });
@@ -556,6 +573,7 @@ describe('즐겨찾기, 담기, 주문하기 버튼', () => {
                 count: 1,
               }],
           },
+          orderCount: 1,
         };
       },
     });
