@@ -19,7 +19,7 @@
       </p>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <span class="text-xl font-bold">{{ drink.price }}</span>
+      <span class="text-xl font-bold">{{ addComma(drink.price) }}</span>
       <span class="text-xl font-bold">원</span>
     </section>
     <section class="mt-4 w-full max-w-sm">
