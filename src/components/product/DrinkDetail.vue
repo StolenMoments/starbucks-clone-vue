@@ -56,18 +56,19 @@
       <div class="mt-1 flex" v-for="option in drink.options" :key="option.name">
         <p class="mr-auto">{{ option.name }}</p>
         <div class="ml-auto">
-          <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded" onclick=""/>
+          <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
+                           @click="option.count > 1 ? option.count -= 1 : '' "/>
           <span class="mr-2 ml-2">{{ option.count }}</span>
-          <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
+          <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded" @click="option.count += 1"/>
         </div>
       </div>
     </section>
     <hr class="mt-2 w-full max-w-sm border-t-4"/>
     <section class="mt-4 flex w-full max-w-sm">
       <div class="mr-auto">
-        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="this.subtractOrderCount"/>
+        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="subtractOrderCount"/>
         <span class="mr-2 ml-2">{{ orderCount }}</span>
-        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="this.addOrderCount"/>
+        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="addOrderCount"/>
       </div>
       <p class="ml-auto text-2xl">
         <span>{{ addComma(getTotalPrice) }}</span>
