@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import DrinkDetail from '@/components/product/DrinkDetail.vue';
 
 test('음료 이름을 보여준다.', () => {
@@ -186,7 +186,7 @@ describe('음료 사이즈 종류', () => {
 describe('컵 옵션 3가지', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(DrinkDetail, {
+    wrapper = mount(DrinkDetail, {
       data() {
         return {
           drink: {
