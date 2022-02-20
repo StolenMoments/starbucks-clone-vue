@@ -38,22 +38,12 @@
     </section>
     <section class="mt-4 w-full max-w-sm">
       <DrinkDetailSizeButtons
-        v-bind:drinkSize="drink.size"/>
+        v-bind:sizeObject="drink.size"
+        v-bind:sizeList="Object.keys(drink.size)"
+      />
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <p class="font-bold">컵 선택</p>
-      <button class="h-10 w-1/3 cursor-pointer rounded-l-2xl border-2 hover:bg-green-300"
-              data-test="store-cup"
-      >매장컵
-      </button>
-      <button class="h-10 w-1/3 cursor-pointer rounded border-2 hover:bg-green-300"
-              data-test="personal-cup"
-      >개인컵
-      </button>
-      <button class="h-10 w-1/3 cursor-pointer rounded-r-2xl border-2 hover:bg-green-300"
-              data-test="disposable-cup"
-      >일회용컵
-      </button>
+      <DrinkDetailCupButtons/>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <p class="font-bold">퍼스널 옵션</p>
@@ -108,10 +98,12 @@ import {
 } from '@heroicons/vue/outline';
 import { HeartIcon, ShareIcon } from '@heroicons/vue/solid';
 import DrinkDetailSizeButtons from '@/components/product/DrinkDetailSizeButtons.vue';
+import DrinkDetailCupButtons from '@/components/product/DrinkDetailCupButtons.vue';
 
 export default {
   name: 'DrinkDetail',
   components: {
+    DrinkDetailCupButtons,
     DrinkDetailSizeButtons,
     PlusCircleIcon,
     MinusCircleIcon,
