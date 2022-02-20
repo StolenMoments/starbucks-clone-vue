@@ -243,6 +243,10 @@ describe('음료 퍼스널 옵션', () => {
 
   test('퍼스널 옵션 1개 추가', () => {
     const personalOptionPrice = wrapper.get('[data-test="personal-option-price"]');
+    const personalOptionCount = wrapper.get('[data-test="personal-option-count"]');
+
+    expect(personalOptionCount.text())
+      .toEqual(2);
 
     expect(personalOptionPrice.text())
       .toBe('1,000');
@@ -268,15 +272,23 @@ describe('총 금액 계산', () => {
     },
   });
 
-  test('기본 가격', () => {
+  test('1개 주문', () => {
     const totalPrice = wrapper.get('[data-test="personal-option-name"]');
+    const orderCount = wrapper.get('[data-test="total-count"]');
+
+    expect(orderCount.text())
+      .toEqual(1);
 
     expect(totalPrice.text())
       .toBe('5,000');
   });
 
   test('3개 주문', () => {
-    const totalPrice = wrapper.get('[data-test="personal-option-price"]');
+    const totalPrice = wrapper.get('[data-test="total-price"]');
+    const orderCount = wrapper.get('[data-test="total-count"]');
+
+    expect(orderCount.text())
+      .toEqual(3);
 
     expect(totalPrice.text())
       .toBe('15,000');
@@ -284,6 +296,10 @@ describe('총 금액 계산', () => {
 
   test('3개 주문 + 옵션 1개 더 추가', () => {
     const totalPrice = wrapper.get('[data-test="total-price"]');
+    const orderCount = wrapper.get('[data-test="total-count"]');
+
+    expect(orderCount.text())
+      .toEqual(3);
 
     expect(totalPrice.text())
       .toBe('15,500');
