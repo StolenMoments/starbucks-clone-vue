@@ -17,7 +17,7 @@
         {{ size }}
       </button>
       <button v-else
-              class="h-10 w-24 cursor-auto rounded border-2 text-gray-200"
+              class="h-12 w-24 cursor-auto rounded border-2 text-gray-200"
               :data-test="`${size}`">{{ size }}
       </button>
     </div>
