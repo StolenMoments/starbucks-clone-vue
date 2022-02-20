@@ -313,7 +313,7 @@ describe('즐겨찾기, 담기, 주문하기 버튼', () => {
     const favorite = wrapper.get('[data-test="favorite"]');
 
     expect(favorite.element.tagName)
-      .toBe('HEARTICON');
+      .toBe('HEART-ICON-STUB');
   });
 
   test('담기 버튼이 보여진다', () => {
