@@ -56,8 +56,8 @@
       <div class="mt-1 flex" v-for="option in drink.options" :key="option.name">
         <p class="mr-auto">{{ option.name }}</p>
         <div class="ml-auto">
-          <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
-          <span class="mr-2 ml-2">1</span>
+          <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded" onclick=""/>
+          <span class="mr-2 ml-2">{{ option.count }}</span>
           <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
         </div>
       </div>
@@ -65,12 +65,12 @@
     <hr class="mt-2 w-full max-w-sm border-t-4"/>
     <section class="mt-4 flex w-full max-w-sm">
       <div class="mr-auto">
-        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer"/>
-        <span class="mr-2 ml-2">1</span>
-        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer"/>
+        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="this.subtractOrderCount"/>
+        <span class="mr-2 ml-2">{{ orderCount }}</span>
+        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="this.addOrderCount"/>
       </div>
       <p class="ml-auto text-2xl">
-        <span>5,000</span>
+        <span>{{ addComma(getTotalPrice) }}</span>
         <span>원</span>
       </p>
     </section>
@@ -112,13 +112,39 @@ export default {
           {
             name: '에스프레소 샷',
             price: 500,
+            count: 1,
           }],
       },
+      orderCount: 1,
     };
   },
   methods: {
     addComma(price) {
       return price.toLocaleString('ko-KR');
+    },
+    addOrderCount() {
+      if (this.$data.orderCount < 50) {
+        this.$data.orderCount += 1;
+      }
+    },
+    subtractOrderCount() {
+      if (this.$data.orderCount > 1) {
+        this.$data.orderCount -= 1;
+      }
+    },
+  },
+  computed: {
+    getTotalPrice() {
+      let totalPrice = this.drink.price * this.$data.orderCount;
+      const defaultOptionCount = 1;
+      for (let i = 0; i < this.$data.drink.options.length; i += 1) {
+        const option = this.$data.drink.options[i];
+        if (option.count > defaultOptionCount) {
+          totalPrice += option.price * (option.count - defaultOptionCount);
+        }
+      }
+
+      return totalPrice;
     },
   },
 };
