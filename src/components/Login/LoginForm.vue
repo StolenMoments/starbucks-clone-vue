@@ -1,13 +1,13 @@
 <template>
   <form class="absolute flex h-full w-full flex-col items-center justify-center">
     <section class="mt-1 mb-1">
-      <label for="user-id">
-        <input id="user-id" type="text" placeholder="아이디" data-test="input-id" v-model="id">
+      <label for="userId">
+        <input id="userId" type="text" placeholder="아이디" data-test="input-id" v-model="id">
       </label>
     </section>
     <section class="mt-1 mb-1">
-      <label for="user-password">
-        <input id="user-password" type="password" placeholder="패스워드" data-test="input-password"
+      <label for="userPassword">
+        <input id="userPassword" type="password" placeholder="패스워드" data-test="input-password"
                v-model="password">
       </label>
     </section>

@@ -1,15 +1,22 @@
 <template>
-  <LoginForm/>
-  <MenuFooterBar/>
+  <main class="pb-16">
+    <DrinkDetail/>
+  </main>
+  <footer>
+    <MenuFooterBar/>
+  </footer>
 </template>
 
 <script>
-import LoginForm from '@/components/Login/LoginForm.vue';
 import MenuFooterBar from '@/components/Menu/MenuFooterBar.vue';
+import DrinkDetail from '@/components/Drink/DrinkDetail.vue';
 
 export default {
   name: 'App',
-  components: { MenuFooterBar, LoginForm },
+  components: {
+    DrinkDetail,
+    MenuFooterBar,
+  },
 };
 
 </script>

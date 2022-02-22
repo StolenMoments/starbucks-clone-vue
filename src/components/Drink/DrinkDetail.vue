@@ -1,0 +1,168 @@
+<template>
+  <main class="flex h-full w-full flex-col place-content-evenly items-center">
+    <section class="relative">
+      <button class="absolute h-6 w-6 top-2 left-2 rounded-xl bg-gray-200">
+        <ArrowCircleLeftIcon/>
+      </button>
+      <img alt="coffee" class="h-80 w-full max-w-sm" src="@/assets/coffee_sample.jpeg"/>
+      <button class="absolute h-6 w-6 top-2 right-2 rounded-xl bg-gray-200">
+        <ShareIcon/>
+      </button>
+    </section>
+    <section class="mt-4 flex w-full max-w-sm">
+      <span class="text-2xl font-bold" data-test="drink-name">{{ drink.name }}</span>
+      <span class="ml-1 text-xs text-pink-400">Best</span>
+    </section>
+    <section class="mt-4 w-full max-w-sm" data-test="drink-desc">
+      <p>
+        {{ drink.desc }}
+      </p>
+    </section>
+    <section class="mt-4 w-full max-w-sm">
+      <span class="text-xl font-bold" data-test="drink-price">{{ addComma(drink.price) }}</span>
+      <span class="text-xl font-bold">원</span>
+    </section>
+    <section class="mt-4 w-full max-w-sm">
+      <button
+        class="h-10 w-1/2 cursor-pointer rounded-l-3xl border-2 hover:bg-red-300 hover:text-white"
+        data-test="hot-button"
+      >
+        HOT
+      </button>
+      <button
+        class="h-10 w-1/2 cursor-pointer rounded-r-3xl border-2 hover:bg-blue-300 hover:text-white"
+        data-test="ice-button"
+      >
+        ICE
+      </button>
+    </section>
+    <section class="mt-4 w-full max-w-sm">
+      <DrinkDetailSizeButtons
+        v-bind:sizeObject="drink.size"
+        v-bind:sizeList="Object.keys(drink.size)"
+      />
+    </section>
+    <section class="mt-4 w-full max-w-sm">
+      <DrinkDetailCupButtons/>
+    </section>
+    <section class="mt-4 w-full max-w-sm">
+      <p class="font-bold">퍼스널 옵션</p>
+      <div class="mt-1 flex" v-for="option in drink.options" :key="option.name">
+        <p class="mr-auto" data-test="personal-option-name">{{ option.name }}</p>
+        <div class="ml-auto">
+          <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
+                           @click="option.count > 1 ? option.count -= 1 : '' "
+                           data-test="subtract-option-count"
+          />
+          <span class="mr-2 ml-2" data-test="personal-option-count">{{ option.count }}</span>
+          <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
+                          @click="option.count += 1"
+                          data-test="add-option-count"/>
+        </div>
+        <p class="hidden" data-test="personal-option-price">{{ option.price }}</p>
+      </div>
+    </section>
+    <hr class="mt-2 w-full max-w-sm border-t-4"/>
+    <section class="mt-4 flex w-full max-w-sm">
+      <div class="mr-auto">
+        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="subtractOrderCount"
+                         data-test="subtract-order-count"
+        />
+        <span class="mr-2 ml-2" data-test="order-count">{{ orderCount }}</span>
+        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="addOrderCount"
+                        data-test="add-order-count"
+        />
+      </div>
+      <p class="ml-auto text-2xl">
+        <span data-test="total-price">{{ addComma(getTotalPrice) }}</span>
+        <span>원</span>
+      </p>
+    </section>
+    <section class="mt-4 flex w-full max-w-sm">
+      <HeartIcon class="inline h-7 w-7 cursor-pointer" data-test="favorite"/>
+      <div class="ml-auto">
+        <button class="h-10 w-16 cursor-pointer rounded border-2" data-test="add-cart">담기</button>
+        <button class="h-10 w-24 cursor-pointer rounded border-2 bg-green-400" data-test="do-order">
+          주문하기
+        </button>
+      </div>
+    </section>
+  </main>
+</template>
+
+<script>
+import {
+  PlusCircleIcon,
+  MinusCircleIcon,
+  ArrowCircleLeftIcon,
+} from '@heroicons/vue/outline';
+import { HeartIcon, ShareIcon } from '@heroicons/vue/solid';
+import DrinkDetailSizeButtons from '@/components/Drink/DrinkDetailSizeButtons.vue';
+import DrinkDetailCupButtons from '@/components/Drink/DrinkDetailCupButtons.vue';
+
+export default {
+  name: 'DrinkDetail',
+  components: {
+    DrinkDetailCupButtons,
+    DrinkDetailSizeButtons,
+    PlusCircleIcon,
+    MinusCircleIcon,
+    HeartIcon,
+    ArrowCircleLeftIcon,
+    ShareIcon,
+  },
+  data() {
+    return {
+      drink: {
+        name: '카페 라떼',
+        price: 5000,
+        desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+        size: {
+          Short: true,
+          Tall: true,
+          Grande: true,
+          Venti: false,
+        },
+        options: [
+          {
+            name: '에스프레소 샷',
+            price: 500,
+            count: 1,
+          }],
+      },
+      orderCount: 1,
+    };
+  },
+  methods: {
+    addComma(price) {
+      return price.toLocaleString('ko-KR');
+    },
+    addOrderCount() {
+      if (this.$data.orderCount < 50) {
+        this.$data.orderCount += 1;
+      }
+    },
+    subtractOrderCount() {
+      if (this.$data.orderCount > 1) {
+        this.$data.orderCount -= 1;
+      }
+    },
+  },
+  computed: {
+    getTotalPrice() {
+      let totalPrice = this.drink.price * this.$data.orderCount;
+      const defaultOptionCount = 1;
+      for (let i = 0; i < this.$data.drink.options.length; i += 1) {
+        const option = this.$data.drink.options[i];
+        if (option.count > defaultOptionCount) {
+          totalPrice += option.price * (option.count - defaultOptionCount);
+        }
+      }
+
+      return totalPrice;
+    },
+  },
+};
+</script>
+
+<style scoped></style>
