@@ -51,6 +51,74 @@ describe('음료 정보', () => {
   });
 });
 
+describe('음료 위첨자 표시', () => {
+  test('인기 메뉴 위첨자', () => {
+    const wrapper = mount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            isBest: true,
+            isNew: false,
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: {
+              Short: true,
+              Tall: true,
+              Grande: true,
+              Venti: true,
+            },
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+          orderCount: 1,
+        };
+      },
+    });
+
+    expect(wrapper.get('[data-test="superscript"]')
+      .text())
+      .toBe('Best');
+  });
+
+  test('신 메뉴 위첨자', () => {
+    const wrapper = mount(DrinkDetail, {
+      data() {
+        return {
+          drink: {
+            name: '카페 라떼',
+            isBest: false,
+            isNew: true,
+            price: 5000,
+            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            size: {
+              Short: true,
+              Tall: true,
+              Grande: true,
+              Venti: true,
+            },
+            options: [
+              {
+                name: '에스프레소 샷',
+                price: 500,
+                count: 1,
+              }],
+          },
+          orderCount: 1,
+        };
+      },
+    });
+
+    expect(wrapper.get('[data-test="superscript"]')
+      .text())
+      .toBe('New');
+  });
+});
+
 describe('음료 온도 선택 버튼', () => {
   const wrapper = shallowMount(DrinkDetail);
   test('HOT 버튼을 보여준다.', () => {
