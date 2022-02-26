@@ -1,8 +1,8 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import DrinkDetail from '@/components/Product/Drink/DrinkDetail.vue';
 
-test('음료 이름을 보여준다.', () => {
-  const wrapper = shallowMount(DrinkDetail, {
+describe('음료 정보', () => {
+  const wrapper = mount(DrinkDetail, {
     data() {
       return {
         drink: {
@@ -13,7 +13,7 @@ test('음료 이름을 보여준다.', () => {
             Short: true,
             Tall: true,
             Grande: true,
-            Venti: false,
+            Venti: true,
           },
           options: [
             {
@@ -26,142 +26,52 @@ test('음료 이름을 보여준다.', () => {
       };
     },
   });
-  const drinkName = wrapper.get('[data-test="drink-name"]');
 
-  expect(drinkName.text())
-    .toBe('카페 라떼');
+  test('음료 이름을 보여준다.', () => {
+    const drinkName = wrapper.get('[data-test="drink-name"]');
+
+    expect(drinkName.text())
+      .toBe('카페 라떼');
+  });
+
+  test('음료 설명을 보여준다.', () => {
+    const drinkDesc = wrapper.get('[data-test="drink-desc"]');
+
+    expect(drinkDesc.text())
+      .toContain('풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진');
+    expect(drinkDesc.text())
+      .toContain('커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼');
+  });
+
+  test('음료 가격을 보여준다.', () => {
+    const drinkPrice = wrapper.get('[data-test="drink-price"]');
+
+    expect(drinkPrice.text())
+      .toBe('5,000');
+  });
 });
 
-test('음료 설명을 보여준다.', () => {
-  const wrapper = shallowMount(DrinkDetail, {
-    data() {
-      return {
-        drink: {
-          name: '카페 라떼',
-          price: 5000,
-          desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: {
-            Short: true,
-            Tall: true,
-            Grande: true,
-            Venti: false,
-          },
-          options: [
-            {
-              name: '에스프레소 샷',
-              price: 500,
-              count: 1,
-            }],
-        },
-        orderCount: 1,
-      };
-    },
+describe('음료 온도 선택 버튼', () => {
+  const wrapper = shallowMount(DrinkDetail);
+  test('HOT 버튼을 보여준다.', () => {
+    const hotButton = wrapper.get('[data-test="hot-button"]');
+
+    expect(hotButton.element.tagName)
+      .toBe('BUTTON');
+
+    expect(hotButton.text())
+      .toBe('HOT');
   });
-  const drinkDesc = wrapper.get('[data-test="drink-desc"]');
 
-  expect(drinkDesc.text())
-    .toContain('풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진');
-  expect(drinkDesc.text())
-    .toContain('커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼');
-});
+  test('ICE 버튼을 보여준다.', () => {
+    const iceButton = wrapper.get('[data-test="ice-button"]');
 
-test('음료 가격을 보여준다.', () => {
-  const wrapper = shallowMount(DrinkDetail, {
-    data() {
-      return {
-        drink: {
-          name: '카페 라떼',
-          price: 5000,
-          desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: {
-            Short: true,
-            Tall: true,
-            Grande: true,
-            Venti: false,
-          },
-          options: [
-            {
-              name: '에스프레소 샷',
-              price: 500,
-              count: 1,
-            }],
-        },
-        orderCount: 1,
-      };
-    },
+    expect(iceButton.element.tagName)
+      .toBe('BUTTON');
+
+    expect(iceButton.text())
+      .toBe('ICE');
   });
-  const drinkPrice = wrapper.get('[data-test="drink-price"]');
-
-  expect(drinkPrice.text())
-    .toBe('5,000');
-});
-
-test('HOT 버튼을 보여준다.', () => {
-  const wrapper = shallowMount(DrinkDetail, {
-    data() {
-      return {
-        drink: {
-          name: '카페 라떼',
-          price: 5000,
-          desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: {
-            Short: true,
-            Tall: true,
-            Grande: true,
-            Venti: false,
-          },
-          options: [
-            {
-              name: '에스프레소 샷',
-              price: 500,
-              count: 1,
-            }],
-        },
-        orderCount: 1,
-      };
-    },
-  });
-  const hotButton = wrapper.get('[data-test="hot-button"]');
-
-  expect(hotButton.element.tagName)
-    .toBe('BUTTON');
-
-  expect(hotButton.text())
-    .toBe('HOT');
-});
-
-test('ICE 버튼을 보여준다.', () => {
-  const wrapper = shallowMount(DrinkDetail, {
-    data() {
-      return {
-        drink: {
-          name: '카페 라떼',
-          price: 5000,
-          desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          size: {
-            Short: true,
-            Tall: true,
-            Grande: true,
-            Venti: false,
-          },
-          options: [
-            {
-              name: '에스프레소 샷',
-              price: 500,
-              count: 1,
-            }],
-        },
-        orderCount: 1,
-      };
-    },
-  });
-  const iceButton = wrapper.get('[data-test="ice-button"]');
-
-  expect(iceButton.element.tagName)
-    .toBe('BUTTON');
-
-  expect(iceButton.text())
-    .toBe('ICE');
 });
 
 describe('음료 사이즈 종류', () => {
