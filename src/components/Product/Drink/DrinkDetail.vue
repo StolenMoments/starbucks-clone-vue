@@ -11,7 +11,8 @@
     </section>
     <section class="mt-4 flex w-full max-w-sm">
       <span class="text-2xl font-bold" data-test="drink-name">{{ drink.name }}</span>
-      <span class="ml-1 text-xs text-pink-400">Best</span>
+      <ProductSuperscript v-if="drink.isBest" type="Best" data-test="superscript-best"/>
+      <ProductSuperscript v-if="drink.isNew" type="New" data-test="superscript-new"/>
     </section>
     <section class="mt-4 w-full max-w-sm" data-test="drink-desc">
       <p>
@@ -99,10 +100,12 @@ import {
 import { HeartIcon, ShareIcon } from '@heroicons/vue/solid';
 import DrinkDetailSizeButtons from '@/components/Product/Drink/DrinkDetailSizeButtons.vue';
 import DrinkDetailCupButtons from '@/components/Product/Drink/DrinkDetailCupButtons.vue';
+import ProductSuperscript from '@/components/Product/ProductSuperscript.vue';
 
 export default {
   name: 'DrinkDetail',
   components: {
+    ProductSuperscript,
     DrinkDetailCupButtons,
     DrinkDetailSizeButtons,
     PlusCircleIcon,
@@ -114,6 +117,8 @@ export default {
   data() {
     return {
       drink: {
+        isBest: true,
+        isNew: false,
         name: '카페 라떼',
         price: 5000,
         desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',

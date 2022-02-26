@@ -80,7 +80,7 @@ describe('음료 위첨자 표시', () => {
       },
     });
 
-    expect(wrapper.get('[data-test="superscript"]')
+    expect(wrapper.get('[data-test="superscript-best"]')
       .text())
       .toBe('Best');
   });
@@ -113,7 +113,7 @@ describe('음료 위첨자 표시', () => {
       },
     });
 
-    expect(wrapper.get('[data-test="superscript"]')
+    expect(wrapper.get('[data-test="superscript-new"]')
       .text())
       .toBe('New');
   });
