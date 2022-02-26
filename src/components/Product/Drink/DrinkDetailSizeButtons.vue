@@ -3,17 +3,18 @@
   <div class="flex">
     <div v-for="size in sizeList" :key="size">
       <button v-if="sizeObject[size]"
-              class="h-12 w-24 cursor-pointer rounded border-2 hover:bg-green-300"
+              class="text-center h-12 w-24 cursor-pointer rounded border-2
+               hover:bg-green-300"
               :data-test="`${size}`"
       >
-        <FasIcon v-if="size === 'Short'"
-                 class="h-3 w-3" :icon="['fas','mug-hot']"/>
-        <FasIcon v-if="size === 'Tall'"
-                 class="h-3.5 w-3.5" :icon="['fas','mug-hot']"/>
-        <FasIcon v-if="size === 'Grande'"
-                 class="h-4 w-4" :icon="['fas','mug-hot']"/>
-        <FasIcon v-if="size === 'Venti'"
-                 class="h-5 w-5" :icon="['fas','mug-hot']"/>
+        <i v-if="size === 'Short'"
+           class="fas fa-mug-hot fa-xs"/>
+        <i v-if="size === 'Tall'"
+           class="fas fa-mug-hot fa-sm"/>
+        <i v-if="size === 'Grande'"
+           class="fas fa-mug-hot fa-md"/>
+        <i v-if="size === 'Venti'"
+           class="fas fa-mug-hot fa-lg"/>
         {{ size }}
       </button>
       <button v-else
