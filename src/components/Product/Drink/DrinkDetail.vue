@@ -97,8 +97,8 @@ import {
   ArrowCircleLeftIcon,
 } from '@heroicons/vue/outline';
 import { HeartIcon, ShareIcon } from '@heroicons/vue/solid';
-import DrinkDetailSizeButtons from '@/components/Drink/DrinkDetailSizeButtons.vue';
-import DrinkDetailCupButtons from '@/components/Drink/DrinkDetailCupButtons.vue';
+import DrinkDetailSizeButtons from '@/components/Product/Drink/DrinkDetailSizeButtons.vue';
+import DrinkDetailCupButtons from '@/components/Product/Drink/DrinkDetailCupButtons.vue';
 
 export default {
   name: 'DrinkDetail',

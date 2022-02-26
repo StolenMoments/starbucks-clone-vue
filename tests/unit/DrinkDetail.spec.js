@@ -1,5 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import DrinkDetail from '@/components/Drink/DrinkDetail.vue';
+import DrinkDetail from '@/components/Product/Drink/DrinkDetail.vue';
 
 test('음료 이름을 보여준다.', () => {
   const wrapper = shallowMount(DrinkDetail, {
