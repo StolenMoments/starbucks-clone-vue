@@ -1,6 +1,6 @@
 <template>
   <main class="pb-16">
-    <DrinkDetail/>
+    <ProductList/>
   </main>
   <footer>
     <MenuFooterBar/>
@@ -9,12 +9,12 @@
 
 <script>
 import MenuFooterBar from '@/components/Menu/MenuFooterBar.vue';
-import DrinkDetail from '@/components/Product/Drink/DrinkDetail.vue';
+import ProductList from '@/components/Product/ProductList.vue';
 
 export default {
   name: 'App',
   components: {
-    DrinkDetail,
+    ProductList,
     MenuFooterBar,
   },
 };
