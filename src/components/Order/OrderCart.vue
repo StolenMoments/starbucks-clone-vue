@@ -40,9 +40,21 @@
           <button class="font-bold text-blue-500 text-base underline" data-test="change-option">
             옵션변경
           </button>
-          <p class="mr-4 text-right text-bold text-xl" data-test="product-price">
-            {{ addComma(getProductPrice(product)) }}
-          </p>
+          <div>
+            <button @click="product.count -=1" :disabled="product.count <= 1"
+                    :data-test="`subtract-product-count-${product.id}`">
+              <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
+            </button>
+            <span class="mr-2 ml-2" :data-test="`product-count-${product.id}`">
+              {{ product.count }}
+            </span>
+            <button @click="product.count += 1" :data-test="`add-product-count-${product.id}`">
+              <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
+            </button>
+            <p class="mr-4 text-right text-bold text-xl" :data-test="`product-price-${product.id}`">
+              {{ addComma(getProductPrice(product)) }}
+            </p>
+          </div>
         </div>
       </section>
     </section>
@@ -61,8 +73,14 @@
 </template>
 
 <script>
+import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/vue/outline';
+
 export default {
   name: 'OrderCart',
+  components: {
+    PlusCircleIcon,
+    MinusCircleIcon,
+  },
   checked: [],
   data() {
     return {
