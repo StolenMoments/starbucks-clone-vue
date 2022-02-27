@@ -1,5 +1,5 @@
 <template>
-  <span v-if="type === 'Best'" class="Best">Best</span>
+  <span v-if="type === 'Hot'" class="Hot">Hot</span>
   <span v-else-if="type === 'New'" class="New">New</span>
 </template>
 
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.Best {
+.Hot {
   @apply ml-1 text-xs text-pink-400 italic
 }
 

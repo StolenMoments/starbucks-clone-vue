@@ -9,7 +9,7 @@ describe('렌더링 테스트', () => {
         products: [
           {
             id: 1,
-            isBest: true,
+            isHot: true,
             isNew: false,
             name: '카라멜 마끼아또',
             engName: 'Caramel Macchiato',
@@ -17,7 +17,7 @@ describe('렌더링 테스트', () => {
           },
           {
             id: 2,
-            isBest: false,
+            isHot: false,
             isNew: false,
             name: '카푸치노',
             engName: 'Cappuccino',
@@ -25,7 +25,7 @@ describe('렌더링 테스트', () => {
           },
           {
             id: 3,
-            isBest: false,
+            isHot: false,
             isNew: true,
             name: '슈크림 라떼',
             engName: 'Choux Cream Latte',
@@ -85,11 +85,11 @@ describe('렌더링 테스트', () => {
   });
 
   test('위첨자 렌더링', () => {
-    const superscriptBest = wrapper.get('[data-test="superscript-best"');
+    const superscriptBest = wrapper.get('[data-test="superscript-hot"');
     const superscriptNew = wrapper.get('[data-test="superscript-new"');
 
     expect(superscriptBest.text())
-      .toBe('Best');
+      .toBe('Hot');
     expect(superscriptNew.text())
       .toBe('New');
   });

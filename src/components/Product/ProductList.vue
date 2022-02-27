@@ -9,7 +9,7 @@
       <div class="ProductText">
         <div>
           <span class="font-bold" data-test="product-name">{{ product.name }}</span>
-          <ProductSuperscript v-if="product.isBest" type="Best" data-test="superscript-best"/>
+          <ProductSuperscript v-if="product.isHot" type="Hot" data-test="superscript-hot"/>
           <ProductSuperscript v-if="product.isNew" type="New" data-test="superscript-new"/>
         </div>
         <p class="text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
@@ -35,7 +35,7 @@ export default {
         {
           id: 1,
           img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000003285]_20210416154437226.jpg',
-          isBest: false,
+          isHot: false,
           isNew: false,
           name: '콜드 브루 오트 라떼',
           engName: 'Cold Brew With Oat Milk',
@@ -44,7 +44,7 @@ export default {
         {
           id: 2,
           img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002081]_20210415133657016.jpg',
-          isBest: false,
+          isHot: false,
           isNew: true,
           name: '돌체 콜드 브루',
           engName: 'Dolce Cold Brew',
@@ -53,7 +53,7 @@ export default {
         {
           id: 3,
           img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000000487]_20210430112319174.jpg',
-          isBest: true,
+          isHot: true,
           isNew: true,
           name: '바닐라 크림 콜드 브루',
           engName: 'Vanilla Cream Cold Brew',
@@ -62,7 +62,7 @@ export default {
         {
           id: 4,
           img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000000479]_20210426091844065.jpg',
-          isBest: true,
+          isHot: true,
           isNew: false,
           name: '나이트로 콜드 브루',
           engName: 'Nitro Cold Brew',
@@ -71,7 +71,7 @@ export default {
         {
           id: 5,
           img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000000038]_20210430113202595.jpg',
-          isBest: false,
+          isHot: false,
           isNew: false,
           name: '콜드 브루',
           engName: 'Cold Brew',
@@ -80,7 +80,7 @@ export default {
         {
           id: 6,
           img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/08/[9200000003661]_20210819094346334.jpg',
-          isBest: true,
+          isHot: true,
           isNew: false,
           name: '시그니처 더 블랙 콜드 브루',
           engName: 'Signature The Black Cold Brew',
