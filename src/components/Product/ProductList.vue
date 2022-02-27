@@ -112,7 +112,7 @@ export default {
 
 @media (max-width: 320px) {
   .ProductSection {
-    @apply ml-2.5
+    @apply ml-2
   }
 
   .ProductImg {
@@ -120,7 +120,7 @@ export default {
   }
 
   .ProductText {
-    @apply ml-3
+    @apply ml-2.5
   }
 }
 </style>
