@@ -11,7 +11,7 @@
     </section>
     <section class="mt-4 flex w-full max-w-sm">
       <span class="text-2xl font-bold" data-test="drink-name">{{ drink.name }}</span>
-      <ProductSuperscript v-if="drink.isBest" type="Best" data-test="superscript-best"/>
+      <ProductSuperscript v-if="drink.isHot" type="Hot" data-test="superscript-hot"/>
       <ProductSuperscript v-if="drink.isNew" type="New" data-test="superscript-new"/>
     </section>
     <section class="mt-4 w-full max-w-sm" data-test="drink-desc">
@@ -117,7 +117,7 @@ export default {
   data() {
     return {
       drink: {
-        isBest: true,
+        isHot: true,
         isNew: false,
         name: '카페 라떼',
         price: 5000,

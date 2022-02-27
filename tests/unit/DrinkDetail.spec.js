@@ -58,7 +58,7 @@ describe('음료 위첨자 표시', () => {
         return {
           drink: {
             name: '카페 라떼',
-            isBest: true,
+            isHot: true,
             isNew: false,
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
@@ -80,9 +80,9 @@ describe('음료 위첨자 표시', () => {
       },
     });
 
-    expect(wrapper.get('[data-test="superscript-best"]')
+    expect(wrapper.get('[data-test="superscript-hot"]')
       .text())
-      .toBe('Best');
+      .toBe('Hot');
   });
 
   test('신 메뉴 위첨자', () => {
@@ -91,7 +91,7 @@ describe('음료 위첨자 표시', () => {
         return {
           drink: {
             name: '카페 라떼',
-            isBest: false,
+            isHot: false,
             isNew: true,
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
