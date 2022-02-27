@@ -143,7 +143,11 @@ describe('텍스트 렌더링 테스트', () => {
   });
 
   test('단일 상품 가격', () => {
-    const productPrices = wrapper.findAll('[data-test="product-price"]');
+    const productPrices = [];
+    for (let i = 1; i <= 3; i += 1) {
+      productPrices.push(wrapper.get(`[data-test="product-price-${i}"]`));
+    }
+
     expect(productPrices.at(0)
       .text())
       .toBe('11,600원');
