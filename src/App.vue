@@ -1,6 +1,6 @@
 <template>
   <main class="pb-16">
-    <OrderCart/>
+    <ProductList/>
   </main>
   <footer>
     <MenuFooterBar/>
@@ -9,12 +9,12 @@
 
 <script>
 import MenuFooterBar from '@/components/Menu/MenuFooterBar.vue';
-import OrderCart from '@/components/Order/OrderCart.vue';
+import ProductList from '@/components/Product/ProductList.vue';
 
 export default {
   name: 'App',
   components: {
-    OrderCart,
+    ProductList,
     MenuFooterBar,
   },
 };
