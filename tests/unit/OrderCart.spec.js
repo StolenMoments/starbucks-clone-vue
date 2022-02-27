@@ -89,21 +89,27 @@ describe('텍스트 렌더링 테스트', () => {
 
   test('상품명 한글', () => {
     const productNames = wrapper.findAll('[data-test="product-name"]');
-    expect(productNames.at(0).text())
+    expect(productNames.at(0)
+      .text())
       .toBe('콜드 브루 오트 라떼');
-    expect(productNames.at(1).text())
+    expect(productNames.at(1)
+      .text())
       .toBe('돌체 콜드 브루');
-    expect(productNames.at(2).text())
+    expect(productNames.at(2)
+      .text())
       .toBe('카라멜 마끼아또');
   });
 
   test('상품명 영문', () => {
     const productEngNames = wrapper.findAll('[data-test="product-eng-name"]');
-    expect(productEngNames.at(0).text())
+    expect(productEngNames.at(0)
+      .text())
       .toBe('Cold Brew With Oat Milk');
-    expect(productEngNames.at(1).text())
+    expect(productEngNames.at(1)
+      .text())
       .toBe('Dolce Cold Brew');
-    expect(productEngNames.at(2).text())
+    expect(productEngNames.at(2)
+      .text())
       .toBe('Caramel Macchiato');
   });
 
@@ -164,6 +170,82 @@ describe('텍스트 렌더링 테스트', () => {
 
 // 미구현
 describe('기능 테스트', () => {
+  const wrapper = mount(OrderCart, {
+    data() {
+      return {
+        products: [
+          {
+            id: 1,
+            img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000003285]_20210416154437226.jpg',
+            name: '콜드 브루 오트 라떼',
+            engName: 'Cold Brew With Oat Milk',
+            temperature: 'ICED',
+            size: 'Tall',
+            cup: '매장컵',
+            price: 5800,
+            count: 2,
+            option: [],
+          },
+          {
+            id: 2,
+            img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002081]_20210415133657016.jpg',
+            name: '돌체 콜드 브루',
+            engName: 'Dolce Cold Brew',
+            temperature: 'ICED',
+            size: 'Grande',
+            cup: '개인컵',
+            price: 6000,
+            count: 2,
+            option: [
+              {
+                id: 7,
+                name: '돌체 시럽',
+                price: 600,
+                count: 3,
+                defaultCount: 0,
+              },
+            ],
+          },
+          {
+            id: 3,
+            img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[126197]_20210415154610012.jpg',
+            name: '카라멜 마끼아또',
+            engName: 'Caramel Macchiato',
+            temperature: 'HOT',
+            size: 'Venti',
+            cup: '일회용컵',
+            price: 6000,
+            count: 1,
+            option: [
+              {
+                id: 1,
+                name: '에스프레소 샷',
+                price: 600,
+                count: 2,
+                defaultCount: 1,
+              },
+            ],
+          },
+        ],
+      };
+    },
+  });
+  test('수량 조절', async () => {
+    const subtractProductButton = wrapper.get('[data-test="subtract-product-count-1"]');
+    const addProductButton = wrapper.get('[data-test="add-product-count-1"]');
+    const productCount = wrapper.get('[data-test="product-count-1"]');
+    const productPrice = wrapper.get('[data-test="product-price-1"]');
+
+    await addProductButton.trigger('click');
+    await addProductButton.trigger('click');
+    await addProductButton.trigger('click');
+    await subtractProductButton.trigger('click');
+
+    expect(Number(productCount.text()))
+      .toEqual(4);
+    expect(productPrice.text())
+      .toBe('23,200원');
+  });
   test('전체 선택', () => {
 
   });
@@ -174,9 +256,6 @@ describe('기능 테스트', () => {
 
   });
   test('단일 상품 선택', () => {
-
-  });
-  test('수량 조절', () => {
 
   });
   test('옵션 변경', () => {
