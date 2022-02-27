@@ -85,13 +85,12 @@ describe('렌더링 테스트', () => {
   });
 
   test('위첨자 렌더링', () => {
-    const productSuperscripts = wrapper.findAll('[data-test="product-superscript"');
+    const superscriptBest = wrapper.get('[data-test="superscript-best"');
+    const superscriptNew = wrapper.get('[data-test="superscript-new"');
 
-    expect(productSuperscripts.at(0)
-      .text())
+    expect(superscriptBest.text())
       .toBe('Best');
-    expect(productSuperscripts.at(1)
-      .text())
+    expect(superscriptNew.text())
       .toBe('New');
   });
 });

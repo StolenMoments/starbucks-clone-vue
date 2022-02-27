@@ -9,8 +9,8 @@
       <div class="ProductText">
         <div>
           <span class="font-bold" data-test="product-name">{{ product.name }}</span>
-          <ProductSuperscript v-if="product.isBest" type="Best" data-test="product-superscript"/>
-          <ProductSuperscript v-if="product.isNew" type="New" data-test="product-superscript"/>
+          <ProductSuperscript v-if="product.isBest" type="Best" data-test="superscript-best"/>
+          <ProductSuperscript v-if="product.isNew" type="New" data-test="superscript-new"/>
         </div>
         <p class="text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
            data-test="product-eng-name">
