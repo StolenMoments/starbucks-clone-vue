@@ -1,8 +1,7 @@
 <template>
-  <span v-if="type === 'Hot'" class="Hot">Hot</span>
-  <span v-else-if="type === 'New'" class="New">New</span>
+  <span :class="type">{{ type }}</span>
 </template>
-
+거
 <script>
 export default {
   name: 'ProductSuperscript',
