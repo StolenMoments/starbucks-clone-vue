@@ -441,7 +441,7 @@ describe('음료 퍼스널 옵션', () => {
     const personalOptionCount = wrapper.get('[data-test="personal-option-count"]');
     const addOptionCount = wrapper.get('[data-test="add-option-count"]');
 
-    await addOptionCount.trigger('click');
+    addOptionCount.trigger('click');
     await wrapper.vm.$nextTick();
     expect(Number(personalOptionCount.text()))
       .toEqual(2);
@@ -501,8 +501,6 @@ describe('총 금액 계산', () => {
     await addOrderCount.trigger('click');
     await addOrderCount.trigger('click');
 
-    await wrapper.vm.$nextTick();
-
     expect(Number(orderCount.text()))
       .toEqual(3);
 
@@ -519,7 +517,6 @@ describe('총 금액 계산', () => {
     await addOrderCount.trigger('click');
     await addOrderCount.trigger('click');
     await addOptionCount.trigger('click');
-    await wrapper.vm.$nextTick();
     expect(Number(orderCount.text()))
       .toEqual(3);
 
