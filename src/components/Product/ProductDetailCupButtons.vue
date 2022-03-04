@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'DrinkDetailCupButtons',
+  name: 'ProductDetailCupButtons',
 };
 </script>
 
