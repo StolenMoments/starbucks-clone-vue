@@ -1,5 +1,5 @@
 <template>
-  <main class="container flex flex-col">
+  <section class="container flex flex-col">
     <section class="mt-8 ml-6">
       <span class="font-bold text-2xl" data-test="category-name">{{ categoryName }}</span>
     </section>
@@ -19,7 +19,7 @@
         <p data-test="product-price">{{ addComma(product.price) }}</p>
       </div>
     </section>
-  </main>
+  </section>
 </template>
 
 <script>

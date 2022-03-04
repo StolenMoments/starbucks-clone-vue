@@ -1,5 +1,5 @@
 <template>
-  <main class="flex h-full w-full flex-col place-content-evenly items-center">
+  <section class="flex h-full w-full flex-col place-content-evenly items-center">
     <section class="relative">
       <button class="absolute h-6 w-6 top-2 left-2 rounded-xl bg-gray-200">
         <ArrowCircleLeftIcon/>
@@ -88,7 +88,7 @@
         </button>
       </div>
     </section>
-  </main>
+  </section>
 </template>
 
 <script>

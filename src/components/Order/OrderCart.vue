@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <section>
     <header class="flex flex-col bg-green-700 text-white" data-test="cart-header">
       <i class="fas fa-arrow-left fa-2x m-1.5"/>
       <p class="mt-4 ml-4 mb-4 text-3xl">장바구니</p>
@@ -69,7 +69,7 @@
         주문하기
       </button>
     </footer>
-  </main>
+  </section>
 </template>
 
 <script>
