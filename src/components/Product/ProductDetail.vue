@@ -10,17 +10,17 @@
       </button>
     </section>
     <section class="mt-4 flex w-full max-w-sm">
-      <span class="text-2xl font-bold" data-test="drink-name">{{ drink.name }}</span>
-      <ProductSuperscript v-if="drink.isHot" type="Hot" data-test="superscript-hot"/>
-      <ProductSuperscript v-if="drink.isNew" type="New" data-test="superscript-new"/>
+      <span class="text-2xl font-bold" data-test="product-name">{{ product.name }}</span>
+      <ProductSuperscript v-if="product.isHot" type="Hot" data-test="superscript-hot"/>
+      <ProductSuperscript v-if="product.isNew" type="New" data-test="superscript-new"/>
     </section>
-    <section class="mt-4 w-full max-w-sm" data-test="drink-desc">
+    <section class="mt-4 w-full max-w-sm" data-test="product-desc">
       <p>
-        {{ drink.desc }}
+        {{ product.desc }}
       </p>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <span class="text-xl font-bold" data-test="drink-price">{{ addComma(drink.price) }}</span>
+      <span class="text-xl font-bold" data-test="product-price">{{ addComma(product.price) }}</span>
       <span class="text-xl font-bold">원</span>
     </section>
     <section class="mt-4 w-full max-w-sm">
@@ -38,17 +38,17 @@
       </button>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <DrinkDetailSizeButtons
-        v-bind:sizeObject="drink.size"
-        v-bind:sizeList="Object.keys(drink.size)"
+      <ProductDetailSizeButtons
+        v-bind:sizeObject="product.size"
+        v-bind:sizeList="Object.keys(product.size)"
       />
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <DrinkDetailCupButtons/>
+      <ProductDetailCupButtons/>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <p class="font-bold">퍼스널 옵션</p>
-      <div class="mt-1 flex" v-for="option in drink.options" :key="option.name">
+      <div class="mt-1 flex" v-for="option in product.options" :key="option.name">
         <p class="mr-auto" data-test="personal-option-name">{{ option.name }}</p>
         <div class="ml-auto">
           <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
@@ -98,16 +98,16 @@ import {
   ArrowCircleLeftIcon,
 } from '@heroicons/vue/outline';
 import { HeartIcon, ShareIcon } from '@heroicons/vue/solid';
-import DrinkDetailSizeButtons from '@/components/Product/Drink/DrinkDetailSizeButtons.vue';
-import DrinkDetailCupButtons from '@/components/Product/Drink/DrinkDetailCupButtons.vue';
+import ProductDetailSizeButtons from '@/components/Product/ProductDetailSizeButtons.vue';
+import ProductDetailCupButtons from '@/components/Product/ProductDetailCupButtons.vue';
 import ProductSuperscript from '@/components/Product/ProductSuperscript.vue';
 
 export default {
-  name: 'DrinkDetail',
+  name: 'ProductDetail',
   components: {
     ProductSuperscript,
-    DrinkDetailCupButtons,
-    DrinkDetailSizeButtons,
+    ProductDetailCupButtons,
+    ProductDetailSizeButtons,
     PlusCircleIcon,
     MinusCircleIcon,
     HeartIcon,
@@ -116,7 +116,7 @@ export default {
   },
   data() {
     return {
-      drink: {
+      product: {
         isHot: true,
         isNew: false,
         name: '카페 라떼',
@@ -155,10 +155,10 @@ export default {
   },
   computed: {
     getTotalPrice() {
-      let totalPrice = this.drink.price * this.$data.orderCount;
+      let totalPrice = this.product.price * this.$data.orderCount;
       const defaultOptionCount = 1;
-      for (let i = 0; i < this.$data.drink.options.length; i += 1) {
-        const option = this.$data.drink.options[i];
+      for (let i = 0; i < this.$data.product.options.length; i += 1) {
+        const option = this.$data.product.options[i];
         if (option.count > defaultOptionCount) {
           totalPrice += option.price * (option.count - defaultOptionCount);
         }

@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'DrinkDetailSizeButtons',
+  name: 'ProductDetailSizeButtons',
   props: {
     sizeObject: Object,
     sizeList: Array,

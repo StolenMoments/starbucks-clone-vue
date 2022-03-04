@@ -1,11 +1,11 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import DrinkDetail from '@/components/Product/Drink/DrinkDetail.vue';
+import ProductDetail from '@/components/Product/ProductDetail.vue';
 
 describe('음료 정보', () => {
-  const wrapper = mount(DrinkDetail, {
+  const wrapper = mount(ProductDetail, {
     data() {
       return {
-        drink: {
+        product: {
           name: '카페 라떼',
           price: 5000,
           desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
@@ -28,35 +28,35 @@ describe('음료 정보', () => {
   });
 
   test('음료 이름을 보여준다.', () => {
-    const drinkName = wrapper.get('[data-test="drink-name"]');
+    const productName = wrapper.get('[data-test="product-name"]');
 
-    expect(drinkName.text())
+    expect(productName.text())
       .toBe('카페 라떼');
   });
 
   test('음료 설명을 보여준다.', () => {
-    const drinkDesc = wrapper.get('[data-test="drink-desc"]');
+    const productDesc = wrapper.get('[data-test="product-desc"]');
 
-    expect(drinkDesc.text())
+    expect(productDesc.text())
       .toContain('풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진');
-    expect(drinkDesc.text())
+    expect(productDesc.text())
       .toContain('커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼');
   });
 
   test('음료 가격을 보여준다.', () => {
-    const drinkPrice = wrapper.get('[data-test="drink-price"]');
+    const productPrice = wrapper.get('[data-test="product-price"]');
 
-    expect(drinkPrice.text())
+    expect(productPrice.text())
       .toBe('5,000');
   });
 });
 
 describe('음료 위첨자 표시', () => {
   test('인기 메뉴 위첨자', () => {
-    const wrapper = mount(DrinkDetail, {
+    const wrapper = mount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             isHot: true,
             isNew: false,
@@ -86,10 +86,10 @@ describe('음료 위첨자 표시', () => {
   });
 
   test('신 메뉴 위첨자', () => {
-    const wrapper = mount(DrinkDetail, {
+    const wrapper = mount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             isHot: false,
             isNew: true,
@@ -120,7 +120,7 @@ describe('음료 위첨자 표시', () => {
 });
 
 describe('음료 온도 선택 버튼', () => {
-  const wrapper = shallowMount(DrinkDetail);
+  const wrapper = shallowMount(ProductDetail);
   test('HOT 버튼을 보여준다.', () => {
     const hotButton = wrapper.get('[data-test="hot-button"]');
 
@@ -171,10 +171,10 @@ describe('음료 사이즈 종류', () => {
   };
 
   test('4가지 사이즈 모두 가능한 케이스', () => {
-    wrapper = mount(DrinkDetail, {
+    wrapper = mount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
@@ -206,10 +206,10 @@ describe('음료 사이즈 종류', () => {
   });
 
   test('3가지 사이즈 가능한 케이스', () => {
-    wrapper = mount(DrinkDetail, {
+    wrapper = mount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
@@ -246,10 +246,10 @@ describe('음료 사이즈 종류', () => {
   });
 
   test('2가지 사이즈 가능한 케이스', () => {
-    wrapper = mount(DrinkDetail, {
+    wrapper = mount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
@@ -286,10 +286,10 @@ describe('음료 사이즈 종류', () => {
   });
 
   test('1가지 사이즈 가능한 케이스', () => {
-    wrapper = mount(DrinkDetail, {
+    wrapper = mount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
@@ -329,10 +329,10 @@ describe('음료 사이즈 종류', () => {
 describe('컵 옵션 3가지', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = mount(DrinkDetail, {
+    wrapper = mount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
@@ -393,10 +393,10 @@ describe('컵 옵션 3가지', () => {
 describe('음료 퍼스널 옵션', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(DrinkDetail, {
+    wrapper = shallowMount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
@@ -452,10 +452,10 @@ describe('총 금액 계산', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(DrinkDetail, {
+    wrapper = shallowMount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
@@ -531,10 +531,10 @@ describe('총 금액 계산', () => {
 describe('즐겨찾기, 담기, 주문하기 버튼', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(DrinkDetail, {
+    wrapper = shallowMount(ProductDetail, {
       data() {
         return {
-          drink: {
+          product: {
             name: '카페 라떼',
             price: 5000,
             desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
