@@ -1,5 +1,8 @@
 <template>
-  <form class="absolute flex h-full w-full flex-col items-center justify-center">
+  <div class="block h-80 flex justify-center items-center">
+    <span class="text-5xl">멋쟁이 커피처럼</span>
+  </div>
+  <form class="flex h-full w-full flex-col items-center justify-center">
     <section class="mt-1 mb-1">
       <label for="username">
         <input id="username" type="text" placeholder="아이디" data-test="input-username"
@@ -87,11 +90,13 @@ export default {
   @apply h-12 w-24 border-blue-400 border-2 ml-1 px-4 py-2 mt-1 mb-1 font-bold rounded-2xl
   hover:bg-blue-200
 }
+
 .ModalBlock {
-  @apply absolute h-full w-full flex justify-center items-center z-50 bg-gray-200
+  @apply absolute h-full w-full flex justify-center items-center top-0 bg-gray-200
 }
+
 .ModalContent {
-  @apply h-1/4 w-1/2 flex flex-col justify-center items-center bg-white
+  @apply absolute h-1/4 w-1/2 flex flex-col justify-center items-center bg-white
 }
 
 </style>
