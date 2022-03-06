@@ -25,9 +25,9 @@
 
 <script>
 import ProductSuperscript from '@/components/Product/ProductSuperscript.vue';
-import ProductRepository from '@/components/Client/ProductRepository';
+import RepositoryFactory from '@/components/Client/RepositoryFactory';
 
-const productRepository = new ProductRepository();
+const productRepository = RepositoryFactory.get('product');
 
 export default {
   name: 'ProductList',

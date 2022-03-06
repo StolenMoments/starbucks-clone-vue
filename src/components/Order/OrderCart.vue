@@ -79,9 +79,9 @@
 
 <script>
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/vue/outline';
-import OrderRepository from '@/components/Client/OrderRepository';
+import RepositoryFactory from '@/components/Client/RepositoryFactory';
 
-const orderRepository = new OrderRepository();
+const orderRepository = RepositoryFactory.get('order');
 
 export default {
   name: 'OrderCart',

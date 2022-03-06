@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import UserRepository from '@/components/Client/UserRepository';
+import RepositoryFactory from '@/components/Client/RepositoryFactory';
 
-const userRepository = new UserRepository();
+const userRepository = RepositoryFactory.get('user');
 
 export default {
   name: 'LoginForm',
