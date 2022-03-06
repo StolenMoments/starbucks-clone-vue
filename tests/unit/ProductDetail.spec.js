@@ -183,23 +183,35 @@ describe('컵 옵션 3가지', () => {
       data() {
         return {
           product: {
-            name: '카페 라떼',
+            nameKr: '카페 라떼',
             price: 5000,
-            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            size: {
-              Short: true,
-              Tall: true,
-              Grande: true,
-              Venti: false,
-            },
+            isHot: true,
+            isNewProduct: true,
+            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            cupSizes: [
+              {
+                name: 'Short',
+                iconSize: 'text-sm',
+                optionNo: 1,
+              },
+              {
+                optionNo: 2,
+                name: 'Tall',
+                iconSize: 'text-md',
+              },
+            ],
+            category: 2,
             options: [
               {
                 name: '에스프레소 샷',
-                price: 500,
+                unitprice: 500,
                 count: 1,
+                baseQuantity: 1,
+                optionNo: 1,
+                quantity: 1,
               }],
           },
-          orderCount: 1,
+          quantity: 1,
         };
       },
     });
@@ -243,27 +255,39 @@ describe('컵 옵션 3가지', () => {
 describe('음료 퍼스널 옵션', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(ProductDetail, {
+    wrapper = mount(ProductDetail, {
       data() {
         return {
           product: {
-            name: '카페 라떼',
+            nameKr: '카페 라떼',
             price: 5000,
-            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            size: {
-              Short: true,
-              Tall: true,
-              Grande: true,
-              Venti: false,
-            },
+            isHot: true,
+            isNewProduct: true,
+            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            cupSizes: [
+              {
+                name: 'Short',
+                iconSize: 'text-sm',
+                optionNo: 1,
+              },
+              {
+                optionNo: 2,
+                name: 'Tall',
+                iconSize: 'text-md',
+              },
+            ],
+            category: 2,
             options: [
               {
                 name: '에스프레소 샷',
                 unitprice: 500,
+                count: 1,
                 baseQuantity: 1,
+                optionNo: 1,
+                quantity: 1,
               }],
           },
-          orderCount: 1,
+          quantity: 1,
         };
       },
     });
@@ -302,27 +326,39 @@ describe('총 금액 계산', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(ProductDetail, {
+    wrapper = mount(ProductDetail, {
       data() {
         return {
           product: {
-            name: '카페 라떼',
+            nameKr: '카페 라떼',
             price: 5000,
-            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            size: {
-              Short: true,
-              Tall: true,
-              Grande: true,
-              Venti: false,
-            },
+            isHot: true,
+            isNewProduct: true,
+            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            cupSizes: [
+              {
+                name: 'Short',
+                iconSize: 'text-sm',
+                optionNo: 1,
+              },
+              {
+                optionNo: 2,
+                name: 'Tall',
+                iconSize: 'text-md',
+              },
+            ],
+            category: 2,
             options: [
               {
                 name: '에스프레소 샷',
-                price: 500,
+                unitprice: 500,
                 count: 1,
+                baseQuantity: 1,
+                optionNo: 1,
+                quantity: 1,
               }],
           },
-          orderCount: 1,
+          quantity: 1,
         };
       },
     });
@@ -346,7 +382,7 @@ describe('총 금액 계산', () => {
   test('3개 주문', async () => {
     const totalPrice = wrapper.get('[data-test="total-price"]');
     const orderCount = wrapper.get('[data-test="order-quantity"]');
-    const addOrderCount = wrapper.get('[data-test="add-order-count"]');
+    const addOrderCount = wrapper.get('[data-test="add-order-quantity"]');
 
     await addOrderCount.trigger('click');
     await addOrderCount.trigger('click');
@@ -361,7 +397,7 @@ describe('총 금액 계산', () => {
   test('3개 주문 + 옵션 1개 더 추가', async () => {
     const totalPrice = wrapper.get('[data-test="total-price"]');
     const orderCount = wrapper.get('[data-test="order-quantity"]');
-    const addOrderCount = wrapper.get('[data-test="add-order-count"]');
+    const addOrderCount = wrapper.get('[data-test="add-order-quantity"]');
     const addOptionCount = wrapper.get('[data-test="add-option-quantity"]');
 
     await addOrderCount.trigger('click');
@@ -371,47 +407,52 @@ describe('총 금액 계산', () => {
       .toEqual(3);
 
     expect(totalPrice.text())
-      .toBe('15,000');
+      .toBe('15,500');
   });
 });
 
 describe('즐겨찾기, 담기, 주문하기 버튼', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(ProductDetail, {
+    wrapper = mount(ProductDetail, {
       data() {
         return {
           product: {
-            name: '카페 라떼',
+            nameKr: '카페 라떼',
             price: 5000,
-            desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            size: {
-              Short: true,
-              Tall: true,
-              Grande: true,
-              Venti: false,
-            },
+            isHot: true,
+            isNewProduct: true,
+            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+            cupSizes: [
+              {
+                name: 'Short',
+                iconSize: 'text-sm',
+                optionNo: 1,
+              },
+              {
+                optionNo: 2,
+                name: 'Tall',
+                iconSize: 'text-md',
+              },
+            ],
+            category: 2,
             options: [
               {
                 name: '에스프레소 샷',
-                price: 500,
+                unitprice: 500,
                 count: 1,
+                baseQuantity: 1,
+                optionNo: 1,
+                quantity: 1,
               }],
           },
-          orderCount: 1,
+          quantity: 1,
         };
       },
     });
   });
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  test('즐겨찾기 버튼이 보여진다.', () => {
-    const favorite = wrapper.get('[data-test="favorite"]');
-
-    expect(favorite.element.tagName)
-      .toBe('HEART-ICON-STUB');
   });
 
   test('담기 버튼이 보여진다', () => {

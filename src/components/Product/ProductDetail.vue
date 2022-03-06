@@ -48,16 +48,19 @@
       <div class="mt-1 flex" v-for="(option, index) in product.options" :key="option.optionNo">
         <p class="mr-auto" data-test="personal-option-name">{{ option.name }}</p>
         <div class="ml-auto">
-          <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
-                           @click="subtractOptionQuantity(index)"
-                           data-test="subtract-option-quantity"
-          />
+          <button @click="subtractOptionQuantity(index)"
+                  data-test="subtract-option-quantity">
+            <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
+            />
+          </button>
           <span class="mr-2 ml-2" data-test="personal-option-count">
             {{ option.quantity = option.quantity ? option.quantity : option.baseQuantity }}
           </span>
-          <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
-                          @click="addOptionQuantity(index)"
-                          data-test="add-option-quantity"/>
+          <button @click="addOptionQuantity(index)"
+                  data-test="add-option-quantity">
+            <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
+            />
+          </button>
         </div>
         <p class="hidden" data-test="personal-option-price">{{ option.unitprice }}</p>
       </div>
@@ -65,13 +68,14 @@
     <hr class="mt-2 w-full max-w-sm border-t-4"/>
     <section class="mt-4 flex w-full max-w-sm">
       <div class="mr-auto">
-        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="subtractOrderQuantity"
-                         data-test="subtract-order-count"
-        />
+        <button @click="subtractOrderQuantity"
+                data-test="subtract-order-count">
+          <MinusCircleIcon class="inline h-7 w-7 cursor-pointer"/>
+        </button>
         <span class="mr-2 ml-2" data-test="order-quantity">{{ quantity }}</span>
-        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="addOrderQuantity"
-                        data-test="add-order-count"
-        />
+        <button @click="addOrderQuantity" data-test="add-order-quantity">
+          <PlusCircleIcon class="inline h-7 w-7 cursor-pointer"/>
+        </button>
       </div>
       <p class="ml-auto text-2xl">
         <span data-test="total-price">{{ addComma(getTotalPrice) }}</span>
