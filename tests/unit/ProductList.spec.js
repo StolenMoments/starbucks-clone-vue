@@ -8,27 +8,27 @@ describe('렌더링 테스트', () => {
         categoryName: '에스프레소',
         products: [
           {
-            id: 1,
+            productNo: 1,
             isHot: true,
-            isNew: false,
-            name: '카라멜 마끼아또',
-            engName: 'Caramel Macchiato',
+            isNewProduct: false,
+            nameKr: '카라멜 마끼아또',
+            nameEng: 'Caramel Macchiato',
             price: 5000,
           },
           {
-            id: 2,
+            productNo: 2,
             isHot: false,
-            isNew: false,
-            name: '카푸치노',
-            engName: 'Cappuccino',
+            isNewProduct: false,
+            nameKr: '카푸치노',
+            nameEng: 'Cappuccino',
             price: 4500,
           },
           {
-            id: 3,
+            productNo: 3,
             isHot: false,
-            isNew: true,
-            name: '슈크림 라떼',
-            engName: 'Choux Cream Latte',
+            isNewProduct: true,
+            nameKr: '슈크림 라떼',
+            nameEng: 'Choux Cream Latte',
             price: 5500,
           },
         ],
@@ -43,7 +43,7 @@ describe('렌더링 테스트', () => {
   });
 
   test('음료명 한글 렌더링', () => {
-    const productNames = wrapper.findAll('[data-test="product-name"');
+    const productNames = wrapper.findAll('[data-test="product-name-kr"');
 
     expect(productNames.at(0)
       .text())
@@ -57,7 +57,7 @@ describe('렌더링 테스트', () => {
   });
 
   test('음료명 영문 렌더링', () => {
-    const productEngNames = wrapper.findAll('[data-test="product-eng-name"');
+    const productEngNames = wrapper.findAll('[data-test="product-name-eng"');
 
     expect(productEngNames.at(0)
       .text())
