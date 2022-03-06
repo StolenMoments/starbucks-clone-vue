@@ -119,7 +119,7 @@ export default {
     getTotalPrice() {
       let totalPrice = 0;
       if (!this.$data.cart) return 0;
-      for (let i = 0; i < 3; i += 1) {
+      for (let i = 0; i < this.$data.cart.length; i += 1) {
         const item = this.$data.cart.at(i);
         totalPrice += this.getProductPrice(item);
       }
