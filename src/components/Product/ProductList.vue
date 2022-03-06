@@ -3,7 +3,8 @@
     <section class="mt-8 ml-6">
       <span class="font-bold text-2xl" data-test="category-name">{{ categoryName }}</span>
     </section>
-    <section v-for="(product, index) in products" :key="index" class="ProductSection">
+    <section v-for="(product, index) in products" :key="index" class="ProductSection"
+             @click="goDetail(product.productNo)" @keydown="goDetail(product.productNo)">
       <img alt="product image" :src="product.imgUrl"
            class="ProductImg" data-test="product-img"/>
       <div class="ProductText">
@@ -41,6 +42,9 @@ export default {
     addComma(price) {
       return price ? `${price.toLocaleString('ko-KR')}원` : price;
     },
+    goDetail(productNo) {
+      this.$router.push(`/product/${productNo}`);
+    },
   },
   async mounted() {
     const response = await productRepository.getProducts();
@@ -51,7 +55,7 @@ export default {
 
 <style lang="postcss" scoped>
 .ProductSection {
-  @apply ml-4 mt-6 flex items-center
+  @apply ml-4 mt-6 flex items-center cursor-pointer hover:bg-gray-100
 }
 
 .ProductImg {
