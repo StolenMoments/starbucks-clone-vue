@@ -17,44 +17,47 @@
       </div>
     </section>
     <section class="mt-6">
-      <section v-for="product in products" :key="product.id" class="ProductSection">
-        <label :for="product.id">
-          <input :id="product.id" type="checkbox" data-test="select-product">
+      <section v-for="(item, index) in cart" :key="index" class="ProductSection">
+        <label :for="item.product.productNo">
+          <input :id="item.product.productNo" type="checkbox" data-test="select-product">
         </label>
-        <img alt="product image" :src="product.img"
+        <img alt="product image" :src="item.product.imgUrl"
              class="ProductImg" data-test="product-img"/>
         <div class="ProductText">
-          <span class="font-bold" data-test="product-name">{{ product.name }}</span>
+          <span class="font-bold" data-test="product-name-kr">{{ item.product.nameKr }}</span>
           <p class="text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
-             data-test="product-eng-name">
-            {{ product.engName }}
+             data-test="product-name-eng">
+            {{ item.product.nameEng }}
           </p>
           <p class="ProductOption" data-test="primary-option">
-            {{ `${product.temperature} | ${product.size} | ${product.cup}` }}
+            {{ item.cupSize.name }}
           </p>
-          <p class="ProductOption" v-for="option in product.option" :key="option.id"
+          <p class="ProductOption" v-for="(option, index) in item.optionsInfo" :key="index"
              data-test="personal-option">
-            {{ option.name }} | {{ option.count }} |
+            {{ option.name }} | {{ item.options.at(index).quantity }} |
             {{
-              addComma(option.price * (option.count - option.defaultCount))
+              addComma(option.unitprice * (item.options.at(index).quantity - option.baseQuantity))
             }}
           </p>
           <button class="font-bold text-blue-500 text-base underline" data-test="change-option">
             옵션변경
           </button>
           <div>
-            <button @click="product.count -=1" :disabled="product.count <= 1"
-                    :data-test="`subtract-product-count-${product.id}`">
+            <button @click="item.quantity -=1"
+                    :disabled="item.quantity <= 1"
+                    :data-test="`subtract-product-count-${index}`">
               <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
             </button>
-            <span class="mr-2 ml-2" :data-test="`product-count-${product.id}`">
-              {{ product.count }}
+            <span class="mr-2 ml-2" :data-test="`product-count-${index}`">
+              {{ item.quantity }}
             </span>
-            <button @click="product.count += 1" :data-test="`add-product-count-${product.id}`">
+            <button @click="item.quantity += 1"
+                    :data-test="`add-product-count-${index}`">
               <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
             </button>
-            <p class="mr-4 text-right text-bold text-xl" :data-test="`product-price-${product.id}`">
-              {{ addComma(getProductPrice(product)) }}
+            <p class="mr-4 text-right text-bold text-xl"
+               :data-test="`product-price-${index}`">
+              {{ addComma(getProductPrice(item)) }}
             </p>
           </div>
         </div>
@@ -76,6 +79,9 @@
 
 <script>
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/vue/outline';
+import OrderRepository from '@/components/Client/OrderRepository';
+
+const orderRepository = new OrderRepository();
 
 export default {
   name: 'OrderCart',
@@ -86,71 +92,22 @@ export default {
   checked: [],
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[38]_20210415154821991.jpg',
-          name: '카푸치노',
-          engName: 'Cappuccino',
-          temperature: 'HOT',
-          size: 'Grande',
-          cup: '일회용컵',
-          price: 4700,
-          count: 2,
-          option: [],
-        },
-        {
-          id: 2,
-          img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2022/02/[9200000000415]_20220210160909365.jpg',
-          name: '슈크림 라떼',
-          engName: 'Choux Cream Latte',
-          temperature: 'HOT',
-          size: 'Venti',
-          cup: '개인컵',
-          price: 5400,
-          count: 2,
-          option: [
-            {
-              id: 7,
-              name: '바닐라 시럽',
-              price: 600,
-              count: 2,
-              defaultCount: 0,
-            },
-          ],
-        },
-        {
-          id: 3,
-          img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[126197]_20210415154610012.jpg',
-          name: '카라멜 마끼아또',
-          engName: 'Caramel Macchiato',
-          temperature: 'ICED',
-          size: 'Tall',
-          cup: '매장컵',
-          price: 4200,
-          count: 1,
-          option: [
-            {
-              id: 1,
-              name: '에스프레소 샷',
-              price: 600,
-              count: 3,
-              defaultCount: 1,
-            },
-          ],
-        },
-      ],
+      cart: [],
     };
   },
   methods: {
     addComma(price) {
       return price ? `${price.toLocaleString('ko-KR')}원` : price;
     },
-    getProductPrice(product) {
-      let price = product.price * product.count;
-      const { option } = product;
-      for (let i = 0; i < option.length; i += 1) {
-        price += (option[i].price * (option[i].count - option[i].defaultCount));
+    getProductPrice(item) {
+      if (!item) return 0;
+      let price = item.product.price * item.quantity;
+      const {
+        optionsInfo,
+        options,
+      } = item;
+      for (let i = 0; i < optionsInfo.length; i += 1) {
+        price += (optionsInfo[i].unitprice * (options[i].quantity - optionsInfo[i].baseQuantity));
       }
       return price;
     },
@@ -161,17 +118,17 @@ export default {
   computed: {
     getTotalPrice() {
       let totalPrice = 0;
-      for (let i = 0; i < this.$data.products.length; i += 1) {
-        const product = this.$data.products.at(i);
-        totalPrice += product.price * product.count;
-
-        const { option } = product;
-        for (let j = 0; j < option.length; j += 1) {
-          totalPrice += (option[j].price * (option[j].count - option[j].defaultCount));
-        }
+      if (!this.$data.cart) return 0;
+      for (let i = 0; i < 3; i += 1) {
+        const item = this.$data.cart.at(i);
+        totalPrice += this.getProductPrice(item);
       }
       return totalPrice;
     },
+  },
+  async mounted() {
+    const response = await orderRepository.getProductsInCart();
+    this.$data.cart = response.data.cart;
   },
 };
 </script>
