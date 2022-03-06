@@ -4,7 +4,7 @@
       <button class="absolute h-6 w-6 top-2 left-2 rounded-xl bg-gray-200" @click="goBack">
         <ArrowCircleLeftIcon/>
       </button>
-      <img alt="coffee" class="h-80 w-full max-w-sm" src="@/assets/coffee_sample.jpeg"/>
+      <img alt="coffee" class="h-80 w-full max-w-sm" :src="product.imgUrl"/>
       <button class="absolute h-6 w-6 top-2 right-2 rounded-xl bg-gray-200">
         <ShareIcon/>
       </button>
@@ -14,7 +14,7 @@
       <ProductSuperscript v-if="product.isHot" type="Hot" data-test="superscript-hot"/>
       <ProductSuperscript v-if="product.isNewProduct" type="New" data-test="superscript-new"/>
     </section>
-    <section class="mt-4 w-full max-w-sm" data-test="product-desc">
+    <section class="mt-4 w-full max-w-sm" data-test="product-description">
       <p>
         {{ product.description }}
       </p>
@@ -59,7 +59,7 @@
                           @click="addOptionQuantity(index)"
                           data-test="add-option-quantity"/>
         </div>
-        <p class="hidden" data-test="personal-option-price">{{ option.price }}</p>
+        <p class="hidden" data-test="personal-option-price">{{ option.unitprice }}</p>
       </div>
     </section>
     <hr class="mt-2 w-full max-w-sm border-t-4"/>
