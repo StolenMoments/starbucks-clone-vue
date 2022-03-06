@@ -191,9 +191,16 @@ export default {
     },
   },
   async mounted() {
-    const payload = {
-      productNo: this.$route.params.id,
-    };
+    let payload;
+    if (this.$route) {
+      payload = {
+        productNo: this.$route.params.id,
+      };
+    } else {
+      payload = {
+        productNo: 1,
+      };
+    }
     const response = await productRepository.getProduct(payload);
     this.$data.product = response.data.product;
   },
