@@ -23,23 +23,7 @@ describe('렌더링 테스트', () => {
 });
 
 describe('기능 테스트', () => {
-  const mockRoute = {
-    params: {
-      id: 1,
-    },
-  };
-  const mockRouter = {
-    push: jest.fn(),
-  };
-
-  const wrapper = mount(LoginForm, {
-    global: {
-      mocks: {
-        $route: mockRoute,
-        $router: mockRouter,
-      },
-    },
-  });
+  const wrapper = mount(LoginForm);
 
   beforeEach(() => {
     jest.clearAllMocks();
