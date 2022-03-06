@@ -1,7 +1,9 @@
 <template>
   <section>
     <header class="flex flex-col bg-green-700 text-white" data-test="cart-header">
-      <i class="fas fa-arrow-left fa-2x m-1.5"/>
+      <button class="inline-block flex justify-start w-fit" @click="goBack">
+        <i class="fas fa-arrow-left fa-2x m-1.5"/>
+      </button>
       <p class="mt-4 ml-4 mb-4 text-3xl">장바구니</p>
     </header>
     <section class="flex justify-between mt-4">
@@ -151,6 +153,9 @@ export default {
         price += (option[i].price * (option[i].count - option[i].defaultCount));
       }
       return price;
+    },
+    goBack() {
+      this.$router.back();
     },
   },
   computed: {
