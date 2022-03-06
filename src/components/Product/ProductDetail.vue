@@ -1,7 +1,7 @@
 <template>
   <section class="flex h-full w-full flex-col place-content-evenly items-center">
     <section class="relative">
-      <button class="absolute h-6 w-6 top-2 left-2 rounded-xl bg-gray-200">
+      <button class="absolute h-6 w-6 top-2 left-2 rounded-xl bg-gray-200" @click="goBack">
         <ArrowCircleLeftIcon/>
       </button>
       <img alt="coffee" class="h-80 w-full max-w-sm" src="@/assets/coffee_sample.jpeg"/>
@@ -151,6 +151,9 @@ export default {
       if (this.$data.orderCount > 1) {
         this.$data.orderCount -= 1;
       }
+    },
+    goBack() {
+      this.$router.back();
     },
   },
   computed: {
