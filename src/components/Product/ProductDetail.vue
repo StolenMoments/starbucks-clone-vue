@@ -10,13 +10,13 @@
       </button>
     </section>
     <section class="mt-4 flex w-full max-w-sm">
-      <span class="text-2xl font-bold" data-test="product-name">{{ product.name }}</span>
+      <span class="text-2xl font-bold" data-test="product-name-kr">{{ product.nameKr }}</span>
       <ProductSuperscript v-if="product.isHot" type="Hot" data-test="superscript-hot"/>
-      <ProductSuperscript v-if="product.isNew" type="New" data-test="superscript-new"/>
+      <ProductSuperscript v-if="product.isNewProduct" type="New" data-test="superscript-new"/>
     </section>
     <section class="mt-4 w-full max-w-sm" data-test="product-desc">
       <p>
-        {{ product.desc }}
+        {{ product.description }}
       </p>
     </section>
     <section class="mt-4 w-full max-w-sm">
@@ -38,27 +38,26 @@
       </button>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <ProductDetailSizeButtons
-        v-bind:sizeObject="product.size"
-        v-bind:sizeList="Object.keys(product.size)"
-      />
+      <ProductDetailSizeButtons :cupSizes="product.cupSizes"/>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <ProductDetailCupButtons/>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <p class="font-bold">퍼스널 옵션</p>
-      <div class="mt-1 flex" v-for="option in product.options" :key="option.name">
+      <div class="mt-1 flex" v-for="(option, index) in product.options" :key="option.optionNo">
         <p class="mr-auto" data-test="personal-option-name">{{ option.name }}</p>
         <div class="ml-auto">
           <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
-                           @click="option.count > 1 ? option.count -= 1 : '' "
-                           data-test="subtract-option-count"
+                           @click="subtractOptionQuantity(index)"
+                           data-test="subtract-option-quantity"
           />
-          <span class="mr-2 ml-2" data-test="personal-option-count">{{ option.count }}</span>
+          <span class="mr-2 ml-2" data-test="personal-option-count">
+            {{ option.quantity = option.quantity ? option.quantity : option.baseQuantity }}
+          </span>
           <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
-                          @click="option.count += 1"
-                          data-test="add-option-count"/>
+                          @click="addOptionQuantity(index)"
+                          data-test="add-option-quantity"/>
         </div>
         <p class="hidden" data-test="personal-option-price">{{ option.price }}</p>
       </div>
@@ -66,11 +65,11 @@
     <hr class="mt-2 w-full max-w-sm border-t-4"/>
     <section class="mt-4 flex w-full max-w-sm">
       <div class="mr-auto">
-        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="subtractOrderCount"
+        <MinusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="subtractOrderQuantity"
                          data-test="subtract-order-count"
         />
-        <span class="mr-2 ml-2" data-test="order-count">{{ orderCount }}</span>
-        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="addOrderCount"
+        <span class="mr-2 ml-2" data-test="order-quantity">{{ quantity }}</span>
+        <PlusCircleIcon class="inline h-7 w-7 cursor-pointer" @click="addOrderQuantity"
                         data-test="add-order-count"
         />
       </div>
@@ -82,7 +81,11 @@
     <section class="mt-4 flex w-full max-w-sm">
       <HeartIcon class="inline h-7 w-7 cursor-pointer" data-test="favorite"/>
       <div class="ml-auto">
-        <button class="h-10 w-16 cursor-pointer rounded border-2" data-test="add-cart">담기</button>
+        <button class="h-10 w-16 cursor-pointer rounded border-2"
+                @click="addToCart"
+                data-test="add-cart">
+          담기
+        </button>
         <button class="h-10 w-24 cursor-pointer rounded border-2 bg-green-400" data-test="do-order">
           주문하기
         </button>
@@ -101,6 +104,10 @@ import { HeartIcon, ShareIcon } from '@heroicons/vue/solid';
 import ProductDetailSizeButtons from '@/components/Product/ProductDetailSizeButtons.vue';
 import ProductDetailCupButtons from '@/components/Product/ProductDetailCupButtons.vue';
 import ProductSuperscript from '@/components/Product/ProductSuperscript.vue';
+import RepositoryFactory from '@/components/Client/RepositoryFactory';
+
+const productRepository = RepositoryFactory.get('product');
+const orderRepository = RepositoryFactory.get('order');
 
 export default {
   name: 'ProductDetail',
@@ -116,59 +123,75 @@ export default {
   },
   data() {
     return {
-      product: {
-        isHot: true,
-        isNew: false,
-        name: '카페 라떼',
-        price: 5000,
-        desc: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-        size: {
-          Short: true,
-          Tall: true,
-          Grande: true,
-          Venti: false,
-        },
-        options: [
-          {
-            name: '에스프레소 샷',
-            price: 500,
-            count: 1,
-          }],
-      },
-      orderCount: 1,
+      product: {},
+      quantity: 1,
     };
   },
   methods: {
     addComma(price) {
-      return price.toLocaleString('ko-KR');
+      if (price) {
+        return price.toLocaleString('ko-KR');
+      }
+      return 0;
     },
-    addOrderCount() {
-      if (this.$data.orderCount < 50) {
-        this.$data.orderCount += 1;
+    addOrderQuantity() {
+      if (this.$data.quantity < 50) {
+        this.$data.quantity += 1;
       }
     },
-    subtractOrderCount() {
-      if (this.$data.orderCount > 1) {
-        this.$data.orderCount -= 1;
+    subtractOrderQuantity() {
+      if (this.$data.quantity > 1) {
+        this.$data.quantity -= 1;
+      }
+    },
+    addOptionQuantity(index) {
+      this.$data.product.options.at(index).quantity += 1;
+    },
+    subtractOptionQuantity(index) {
+      if (this.$data.product.options.at(index).quantity > 1) {
+        this.$data.product.options.at(index).quantity -= 1;
       }
     },
     goBack() {
       this.$router.back();
     },
+    addToCart() {
+      const payload = {
+        productNo: this.$data.product.productNo,
+        quantity: this.$data.quantity,
+        cupSize: 2,
+        options: this.$data.product.options,
+      };
+      orderRepository.addProductToCart(payload);
+      this.$router.push('/cart');
+    },
   },
   computed: {
     getTotalPrice() {
-      let totalPrice = this.product.price * this.$data.orderCount;
-      const defaultOptionCount = 1;
+      if (!this.$data.product.options) {
+        return 0;
+      }
+
+      let totalPrice = this.product.price * this.$data.quantity;
       for (let i = 0; i < this.$data.product.options.length; i += 1) {
         const option = this.$data.product.options[i];
-        if (option.count > defaultOptionCount) {
-          totalPrice += option.price * (option.count - defaultOptionCount);
+        if (!option.quantity) {
+          option.quantity = option.baseQuantity;
+        }
+        if (option.quantity > option.baseQuantity) {
+          totalPrice += option.unitprice * (option.quantity - option.baseQuantity);
         }
       }
 
       return totalPrice;
     },
+  },
+  async mounted() {
+    const payload = {
+      productNo: this.$route.params.id,
+    };
+    const response = await productRepository.getProduct(payload);
+    this.$data.product = response.data.product;
   },
 };
 </script>

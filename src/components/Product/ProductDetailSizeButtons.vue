@@ -1,25 +1,21 @@
 <template>
   <p class="font-bold">사이즈</p>
   <div class="flex">
-    <div v-for="size in sizeList" :key="size">
-      <button v-if="sizeObject[size]"
-              class="text-center h-12 w-24 cursor-pointer rounded border-2
+    <div v-for="size in cupSizes" :key="size">
+      <button
+        class="text-center h-12 w-24 cursor-pointer rounded border-2
                hover:bg-green-300"
-              :data-test="`${size}`"
+        :data-test="`${size.name}`"
       >
-        <i v-if="size === 'Short'"
+        <i v-if="size.name === 'Short'"
            class="fas fa-mug-hot fa-xs"/>
-        <i v-if="size === 'Tall'"
+        <i v-if="size.name === 'Tall'"
            class="fas fa-mug-hot fa-sm"/>
-        <i v-if="size === 'Grande'"
+        <i v-if="size.name === 'Grande'"
            class="fas fa-mug-hot fa-md"/>
-        <i v-if="size === 'Venti'"
+        <i v-if="size.name === 'Venti'"
            class="fas fa-mug-hot fa-lg"/>
-        {{ size }}
-      </button>
-      <button v-else
-              class="h-12 w-24 cursor-auto rounded border-2 text-gray-200"
-              :data-test="`${size}`">{{ size }}
+        {{ size.name }}
       </button>
     </div>
   </div>
@@ -29,8 +25,7 @@
 export default {
   name: 'ProductDetailSizeButtons',
   props: {
-    sizeObject: Object,
-    sizeList: Array,
+    cupSizes: Array,
   },
 };
 </script>
