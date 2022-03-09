@@ -82,13 +82,13 @@ export default {
 
 <style scoped>
 .LoginButton {
-  @apply h-12 w-24 bg-blue-400  px-4 py-2 mt-1 mb-1 text-white font-bold rounded-2xl
-  hover:bg-blue-500
+  @apply h-12 w-24 bg-green-400  px-4 py-2 mt-1 mb-1 text-white font-bold rounded-2xl
+  hover:bg-green-500
 }
 
 .JoinButton {
-  @apply h-12 w-24 border-blue-400 border-2 ml-1 px-4 py-2 mt-1 mb-1 font-bold rounded-2xl
-  hover:bg-blue-200
+  @apply h-12 w-24 border-green-400 border-2 ml-1 px-4 py-2 mt-1 mb-1 font-bold rounded-2xl
+  hover:bg-green-200
 }
 
 .ModalBlock {
