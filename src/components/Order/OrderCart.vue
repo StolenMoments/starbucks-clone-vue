@@ -17,51 +17,7 @@
       </div>
     </section>
     <section class="mt-6">
-      <section v-for="(item, index) in cart" :key="index" class="ProductSection">
-        <label :for="item.product.productNo">
-          <input :id="item.product.productNo" type="checkbox" data-test="select-product">
-        </label>
-        <img alt="product image" :src="item.product.imgUrl"
-             class="ProductImg" data-test="product-img"/>
-        <div class="ProductText">
-          <span class="font-bold" data-test="product-name-kr">{{ item.product.nameKr }}</span>
-          <p class="text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
-             data-test="product-name-eng">
-            {{ item.product.nameEng }}
-          </p>
-          <p class="ProductOption" data-test="primary-option">
-            {{ item.cupSize.name }}
-          </p>
-          <p class="ProductOption" v-for="(option, index) in item.optionsInfo" :key="index"
-             data-test="personal-option">
-            {{ option.name }} | {{ item.options.at(index).quantity }} |
-            {{
-              addComma(option.unitprice * (item.options.at(index).quantity - option.baseQuantity))
-            }}
-          </p>
-          <button class="font-bold text-blue-500 text-base underline" data-test="change-option">
-            옵션변경
-          </button>
-          <div>
-            <button @click="item.quantity -=1"
-                    :disabled="item.quantity <= 1"
-                    :data-test="`subtract-product-count-${index}`">
-              <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
-            </button>
-            <span class="mr-2 ml-2" :data-test="`product-count-${index}`">
-              {{ item.quantity }}
-            </span>
-            <button @click="item.quantity += 1"
-                    :data-test="`add-product-count-${index}`">
-              <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"/>
-            </button>
-            <p class="mr-4 text-right text-bold text-xl"
-               :data-test="`product-price-${index}`">
-              {{ addComma(getProductPrice(item)) }}
-            </p>
-          </div>
-        </div>
-      </section>
+      <OrderCartItem :cart="cart" v-on:onSubtractItem="subtractItem" v-on:onAddItem="addItem"/>
     </section>
     <footer class="flex flex-col justify-start mt-4 border-t-2">
       <div class="flex justify-between mt-4 text-right text-2xl">
@@ -78,16 +34,15 @@
 </template>
 
 <script>
-import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/vue/outline';
 import RepositoryFactory from '@/components/Client/RepositoryFactory';
+import OrderCartItem from '@/components/Order/OrderCartItem.vue';
 
 const orderRepository = RepositoryFactory.get('order');
 
 export default {
   name: 'OrderCart',
   components: {
-    PlusCircleIcon,
-    MinusCircleIcon,
+    OrderCartItem,
   },
   checked: [],
   data() {
@@ -98,6 +53,17 @@ export default {
   methods: {
     addComma(price) {
       return price ? `${price.toLocaleString('ko-KR')}원` : price;
+    },
+    goBack() {
+      this.$router.back();
+    },
+    subtractItem(index) {
+      if (this.cart.at(index).quantity > 1) {
+        this.cart.at(index).quantity -= 1;
+      }
+    },
+    addItem(index) {
+      this.cart.at(index).quantity += 1;
     },
     getProductPrice(item) {
       if (!item) return 0;
@@ -110,9 +76,6 @@ export default {
         price += (optionsInfo[i].unitprice * (options[i].quantity - optionsInfo[i].baseQuantity));
       }
       return price;
-    },
-    goBack() {
-      this.$router.back();
     },
   },
   computed: {
@@ -134,41 +97,8 @@ export default {
 </script>
 
 <style scoped>
-.ProductSection {
-  @apply ml-4 flex
-}
-
-.ProductImg {
-  @apply h-20 w-20 ml-4 rounded-full
-}
-
-.ProductText {
-  @apply w-full ml-4 text-lg overflow-hidden text-ellipsis whitespace-nowrap
-}
-
-.ProductOption {
-  @apply text-base text-gray-400
-}
-
 .OrderButton {
   @apply h-12 w-1/3 ml-auto mr-auto mt-4 bg-green-400 text-xl font-bold rounded-2xl
 }
 
-@media (max-width: 320px) {
-  .ProductSection {
-    @apply ml-2
-  }
-
-  .ProductImg {
-    @apply h-16 w-16 ml-1
-  }
-
-  .ProductText {
-    @apply ml-1 text-sm
-  }
-
-  .ProductOption {
-    @apply text-sm text-gray-400
-  }
-}
 </style>
