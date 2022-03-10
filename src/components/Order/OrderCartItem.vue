@@ -4,9 +4,14 @@
       <input :id="item.product.productNo" type="checkbox" data-test="select-product">
     </label>
     <img alt="product image" :src="item.product.imgUrl"
-         class="ProductImg" data-test="product-img"/>
+         class="ProductImg" data-test="product-img"
+         @keydown="goDetail(item.product.productNo)"
+         @click="goDetail(item.product.productNo)"/>
     <div class="ProductText">
-      <span class="font-bold" data-test="product-name-kr">{{ item.product.nameKr }}</span>
+      <button class="font-bold cursor-pointer hover:bg-blue-200"
+              @click="goDetail(item.product.productNo)"
+              data-test="product-name-kr">{{ item.product.nameKr }}
+      </button>
       <p class="text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
          data-test="product-name-eng">
         {{ item.product.nameEng }}
@@ -79,6 +84,9 @@ export default {
       }
       return price;
     },
+    goDetail(productNo) {
+      this.$router.push(`/product/${productNo}`);
+    },
   },
 };
 </script>
@@ -89,7 +97,7 @@ export default {
 }
 
 .ProductImg {
-  @apply h-20 w-20 ml-4 rounded-full
+  @apply h-20 w-20 ml-4 rounded-full cursor-pointer
 }
 
 .ProductText {
