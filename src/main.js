@@ -9,6 +9,7 @@ import ProductDetail from '@/components/Product/ProductDetail.vue';
 import ProductList from '@/components/Product/ProductList.vue';
 import OrderCart from '@/components/Order/OrderCart.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import store from './store';
 import App from './App.vue';
 
 const login = LoginForm;
@@ -47,5 +48,6 @@ const router = createRouter({
 library.add(fas, far);
 const app = createApp(App);
 app.use(router);
+app.use(store);
 app.component('FasIcon', FontAwesomeIcon);
 app.mount('#app');
