@@ -45,6 +45,13 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach(async (to) => {
+  if (!store.state.token && to.name !== 'login') {
+    return { name: 'login' };
+  }
+  return null;
+});
+
 library.add(fas, far);
 const app = createApp(App);
 app.use(router);
