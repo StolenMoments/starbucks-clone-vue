@@ -21,11 +21,12 @@ export default {
       products: [],
     };
   },
-  methods: {
-  },
-  async created() {
-    const response = await productRepository.getProducts();
-    this.products = response.data.products;
+  methods: {},
+  created() {
+    productRepository.getProducts()
+      .then((response) => {
+        this.products = response.data.products;
+      });
   },
 };
 </script>
