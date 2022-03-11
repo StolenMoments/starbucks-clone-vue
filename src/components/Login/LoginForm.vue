@@ -101,7 +101,7 @@ export default {
   items-center z-50 bg-white text-center
 }
 
-@media (max-width: 425px) {
+@media (max-width: 770px) {
   .ModalContent {
     @apply w-full
   }
