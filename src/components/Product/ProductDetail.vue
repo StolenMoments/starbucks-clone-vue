@@ -55,18 +55,20 @@
       <p class="font-bold">퍼스널 옵션</p>
       <div class="mt-1 flex" v-for="(option, index) in product.options" :key="option.optionNo">
         <p class="mr-auto" data-test="personal-option-name">{{ option.name }}</p>
-        <div class="ml-auto">
+        <div class="flex justify-center">
           <button @click="subtractOptionQuantity(index)"
+                  class="mr-6"
                   data-test="subtract-option-quantity">
-            <MinusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
+            <MinusCircleIcon class="block h-7 w-7 cursor-pointer rounded"
             />
           </button>
-          <span class="mr-2 ml-2" data-test="personal-option-count">
+          <span class="absolute" data-test="personal-option-count">
             {{ option.quantity = option.quantity ? option.quantity : option.baseQuantity }}
           </span>
           <button @click="addOptionQuantity(index)"
+                  class="ml-6"
                   data-test="add-option-quantity">
-            <PlusCircleIcon class="inline h-7 w-7 cursor-pointer rounded"
+            <PlusCircleIcon class="block h-7 w-7 cursor-pointer rounded"
             />
           </button>
         </div>
