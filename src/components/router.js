@@ -42,6 +42,9 @@ router.beforeEach(async (to) => {
   if (!store.state.token && to.name !== 'login') {
     return { name: 'login' };
   }
+  if (store.state.token && to.name === 'login') {
+    return { name: 'list' };
+  }
   return null;
 });
 
