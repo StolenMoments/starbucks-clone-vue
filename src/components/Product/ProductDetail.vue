@@ -46,7 +46,7 @@
       </button>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <ProductDetailSizeButtons :cupSizes="product.cupSizes" v-on:onSetCupsize="setCupSize"/>
+      <ProductDetailSizeButtons :cupSizes="product.cupSizes" v-on:onSetCupSize="setCupSize"/>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <ProductDetailCupButtons/>
@@ -159,11 +159,11 @@ export default {
       }
     },
     addOptionQuantity(index) {
-      this.$data.product.options.at(index).quantity += 1;
+      this.product.options.at(index).quantity += 1;
     },
     subtractOptionQuantity(index) {
-      if (this.$data.product.options.at(index).quantity > 1) {
-        this.$data.product.options.at(index).quantity -= 1;
+      if (this.product.options.at(index).quantity > this.product.options.at(index).baseQuantity) {
+        this.product.options.at(index).quantity -= 1;
       }
     },
     goBack() {
