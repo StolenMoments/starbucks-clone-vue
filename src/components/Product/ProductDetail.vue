@@ -25,20 +25,28 @@
     </section>
     <section class="mt-4 w-full max-w-sm">
       <button
-        class="h-10 w-1/2 cursor-pointer rounded-l-3xl border-2 hover:bg-red-300 hover:text-white"
+        class="HotButton"
+        :class="{
+          'bg-red-400 text-white': this.temperature === 'HOT',
+        }"
+        @click="setTemperature('HOT')"
         data-test="hot-button"
       >
         HOT
       </button>
       <button
-        class="h-10 w-1/2 cursor-pointer rounded-r-3xl border-2 hover:bg-blue-300 hover:text-white"
+        class="IcedButton"
+        :class="{
+          'bg-blue-400 text-white': this.temperature === 'ICED',
+        }"
+        @click="setTemperature('ICED')"
         data-test="ice-button"
       >
-        ICE
+        ICED
       </button>
     </section>
     <section class="mt-4 w-full max-w-sm">
-      <ProductDetailSizeButtons :cupSizes="product.cupSizes"/>
+      <ProductDetailSizeButtons :cupSizes="product.cupSizes" v-on:onSetCupsize="setCupSize"/>
     </section>
     <section class="mt-4 w-full max-w-sm">
       <ProductDetailCupButtons/>
@@ -129,6 +137,8 @@ export default {
     return {
       product: {},
       quantity: 1,
+      cupSize: 0,
+      temperature: '',
     };
   },
   methods: {
@@ -169,6 +179,12 @@ export default {
       orderRepository.addProductToCart(payload);
       this.$router.push('/cart');
     },
+    setTemperature(temperature) {
+      this.temperature = temperature;
+    },
+    setCupSize(size) {
+      this.cupSize = size;
+    },
   },
   computed: {
     getTotalPrice() {
@@ -191,6 +207,9 @@ export default {
     },
   },
   async mounted() {
+    if (this.$store.state.token === '') {
+      await this.$router.push('/');
+    }
     let payload;
     if (this.$route) {
       payload = {
@@ -207,4 +226,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.HotButton {
+  @apply h-10 w-1/2 cursor-pointer rounded-l-3xl border-2 hover:bg-red-300 hover:text-white
+}
+
+.IcedButton {
+  @apply h-10 w-1/2 cursor-pointer rounded-r-3xl border-2 hover:bg-blue-300 hover:text-white
+}
+</style>

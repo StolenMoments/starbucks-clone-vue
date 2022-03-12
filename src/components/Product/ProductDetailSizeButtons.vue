@@ -5,6 +5,8 @@
       <button
         class="text-center h-12 w-24 cursor-pointer rounded border-2
                hover:bg-green-300"
+        @click="selectOption(size.optionNo)"
+        :class="{'bg-green-500 font-bold text-white': selected === size.optionNo }"
         :data-test="`${size.name}`"
       >
         <i v-if="size.name === 'Short'"
@@ -26,6 +28,17 @@ export default {
   name: 'ProductDetailSizeButtons',
   props: {
     cupSizes: Array,
+  },
+  data() {
+    return {
+      selected: 0,
+    };
+  },
+  methods: {
+    selectOption(optionNo) {
+      this.selected = optionNo;
+      this.$emit('onSetCupSize', optionNo);
+    },
   },
 };
 </script>
