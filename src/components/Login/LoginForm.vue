@@ -67,7 +67,9 @@ export default {
       userRepository.login(payload)
         .then((response) => {
           const { data } = response;
-          this.$store.commit('setToken', `${data.token_type} ${data.access_token}`);
+          const token = `${data.token_type} ${data.access_token}`;
+          sessionStorage.setItem('token', token);
+          this.$store.commit('setToken', token);
           this.$router.push('/product?category=1');
         })
         .catch(() => {

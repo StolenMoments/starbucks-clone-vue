@@ -2,7 +2,7 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-    token: '',
+    token: sessionStorage.getItem('token') || '',
   },
   getters: {
     getToken() {
