@@ -26,6 +26,7 @@
 <script>
 export default {
   name: 'ProductDetailSizeButtons',
+  emits: ['onSetCupSize'],
   props: {
     cupSizes: Array,
   },
