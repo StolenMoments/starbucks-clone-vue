@@ -77,13 +77,15 @@
     </section>
     <hr class="mt-2 w-full max-w-sm border-t-4"/>
     <section class="mt-4 flex w-full max-w-sm">
-      <div class="mr-auto">
+      <div class="flex justify-center">
         <button @click="subtractOrderQuantity"
+                class="mr-6 pb-1.5"
                 data-test="subtract-order-count">
           <MinusCircleIcon class="inline h-7 w-7 cursor-pointer"/>
         </button>
-        <span class="mr-2 ml-2" data-test="order-quantity">{{ quantity }}</span>
-        <button @click="addOrderQuantity" data-test="add-order-quantity">
+        <span class="absolute" data-test="order-quantity">{{ quantity }}</span>
+        <button class="ml-6 pb-1.5"
+                @click="addOrderQuantity" data-test="add-order-quantity">
           <PlusCircleIcon class="inline h-7 w-7 cursor-pointer"/>
         </button>
       </div>
