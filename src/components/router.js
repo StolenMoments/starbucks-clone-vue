@@ -4,6 +4,8 @@ import ProductList from '@/components/Product/ProductList.vue';
 import OrderCart from '@/components/Order/OrderCart.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import store from '@/store';
+import orderPayment from '@/components/Order/OrderPayment.vue';
+import orderComplete from '@/components/Order/OrderComplete.vue';
 
 const login = LoginForm;
 const productDetail = ProductDetail;
@@ -30,6 +32,16 @@ const routes = [
     path: '/cart',
     component: orderCart,
     name: 'cart',
+  },
+  {
+    path: '/payment',
+    component: orderPayment,
+    name: 'payment',
+  },
+  {
+    path: '/complete',
+    component: orderComplete,
+    name: 'complete',
   },
 ];
 
