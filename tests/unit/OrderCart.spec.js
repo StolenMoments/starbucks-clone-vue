@@ -1,83 +1,105 @@
 import OrderCart from '@/components/Order/OrderCart.vue';
-import { mount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
+
+const testCartList = [
+  {
+    quantity: 2,
+    cupSize: {
+      optionNo: 2,
+      name: 'Tall',
+    },
+    options: [],
+    product: {
+      productNo: 1,
+      nameKr: '콜드 브루 오트 라떼',
+      nameEng: 'Cold Brew With Oat Milk',
+      isNewProduct: true,
+      isHot: false,
+      imgUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
+      price: 5800,
+    },
+    optionsInfo: [],
+  }, {
+    quantity: 2,
+    cupSize: {
+      name: 'Grande',
+      optionNo: 3,
+    },
+    options: [
+      {
+        optionNo: 2,
+        quantity: 3,
+      }],
+    product: {
+      productNo: 1,
+      nameKr: '돌체 콜드 브루',
+      nameEng: 'Dolce Cold Brew',
+      isNewProduct: true,
+      isHot: false,
+      imgUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
+      price: 6000,
+    },
+    optionsInfo: [
+      {
+        name: '돌체 시럽',
+        unitprice: 600,
+        baseQuantity: 0,
+        optionNo: 2,
+      }],
+  }, {
+    quantity: 1,
+    cupSize: {
+      optionNo: 4,
+      name: 'Venti',
+    },
+    options: [
+      {
+        optionNo: 1,
+        quantity: 2,
+      }],
+    product: {
+      productNo: 3,
+      nameKr: '카라멜 마끼아또',
+      nameEng: 'Caramel Macchiato',
+      isNewProduct: false,
+      isHot: true,
+      imgUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
+      price: 6000,
+    },
+    optionsInfo: [
+      {
+        name: '에스프레소 샷',
+        unitprice: 600,
+        baseQuantity: 1,
+        optionNo: 1,
+      }],
+  }];
+
+const mockGetProducts = jest.fn();
+jest.mock(
+  '@/components/Client/OrderRepository',
+  () => jest.fn()
+    .mockImplementation(() => ({
+      getProductsInCart: jest.fn(() => ({
+        data: {
+          cart: testCartList,
+        },
+      })),
+    })),
+);
 
 describe('텍스트 렌더링 테스트', () => {
+  beforeEach(() => {
+    mockGetProducts.mockResolvedValueOnce({ data: { cart: testCartList } });
+  });
+  afterEach(() => {
+    mockGetProducts.mockClear();
+  });
+
   const wrapper = mount(OrderCart, {
     data() {
       return {
-        cart: [
-          {
-            quantity: 2,
-            cupSize: {
-              optionNo: 2,
-              name: 'Tall',
-            },
-            options: [],
-            product: {
-              productNo: 1,
-              nameKr: '콜드 브루 오트 라떼',
-              nameEng: 'Cold Brew With Oat Milk',
-              isNewProduct: true,
-              isHot: false,
-              imgUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
-              price: 5800,
-            },
-            optionsInfo: [],
-          }, {
-            quantity: 2,
-            cupSize: {
-              name: 'Grande',
-              optionNo: 3,
-            },
-            options: [
-              {
-                optionNo: 2,
-                quantity: 3,
-              }],
-            product: {
-              productNo: 1,
-              nameKr: '돌체 콜드 브루',
-              nameEng: 'Dolce Cold Brew',
-              isNewProduct: true,
-              isHot: false,
-              imgUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
-              price: 6000,
-            },
-            optionsInfo: [
-              {
-                name: '돌체 시럽',
-                unitprice: 600,
-                baseQuantity: 0,
-                optionNo: 2,
-              }],
-          }, {
-            quantity: 1,
-            cupSize: {
-              optionNo: 4,
-              name: 'Venti',
-            },
-            options: [
-              {
-                optionNo: 1,
-                quantity: 2,
-              }],
-            product: {
-              productNo: 3,
-              nameKr: '카라멜 마끼아또',
-              nameEng: 'Caramel Macchiato',
-              isNewProduct: false,
-              isHot: true,
-              imgUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
-              price: 6000,
-            },
-            optionsInfo: [
-              {
-                name: '에스프레소 샷',
-                unitprice: 600,
-                baseQuantity: 1,
-                optionNo: 1,
-              }],
-          }],
+        cart: [],
       };
     },
   });
@@ -193,86 +215,20 @@ describe('텍스트 렌더링 테스트', () => {
 
 // 미구현
 describe('기능 테스트', () => {
+  beforeEach(() => {
+    mockGetProducts.mockResolvedValueOnce({ data: { cart: testCartList } });
+  });
+  afterEach(() => {
+    mockGetProducts.mockClear();
+  });
+
   const wrapper = mount(OrderCart, {
     data() {
       return {
-        cart: [
-          {
-            quantity: 2,
-            cupSize: {
-              optionNo: 2,
-              name: 'Tall',
-            },
-            options: [],
-            product: {
-              productNo: 1,
-              nameKr: '콜드 브루 오트 라떼',
-              nameEng: 'Cold Brew With Oat Milk',
-              isNewProduct: true,
-              isHot: false,
-              imgUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
-              price: 5800,
-            },
-            optionsInfo: [],
-          }, {
-            quantity: 2,
-            cupSize: {
-              name: 'Grande',
-              optionNo: 3,
-            },
-            options: [
-              {
-                optionNo: 2,
-                quantity: 3,
-              }],
-            product: {
-              productNo: 1,
-              nameKr: '돌체 콜드 브루',
-              nameEng: 'Dolce Cold Brew',
-              isNewProduct: true,
-              isHot: false,
-              imgUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
-              price: 6000,
-            },
-            optionsInfo: [
-              {
-                name: '돌체 시럽',
-                unitprice: 600,
-                baseQuantity: 0,
-                optionNo: 2,
-              }],
-          }, {
-            quantity: 1,
-            cupSize: {
-              optionNo: 4,
-              name: 'Venti',
-            },
-            options: [
-              {
-                optionNo: 1,
-                quantity: 2,
-              }],
-            product: {
-              productNo: 3,
-              nameKr: '카라멜 마끼아또',
-              nameEng: 'Caramel Macchiato',
-              isNewProduct: false,
-              isHot: true,
-              imgUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
-              price: 6000,
-            },
-            optionsInfo: [
-              {
-                name: '에스프레소 샷',
-                unitprice: 600,
-                baseQuantity: 1,
-                optionNo: 1,
-              }],
-          }],
+        cart: [],
       };
     },
   });
-
   test('수량 조절', async () => {
     const subtractProductButton = wrapper.get('[data-test="subtract-product-count-0"]');
     const addProductButton = wrapper.get('[data-test="add-product-count-0"]');
@@ -283,6 +239,7 @@ describe('기능 테스트', () => {
     await addProductButton.trigger('click');
     await addProductButton.trigger('click');
     await subtractProductButton.trigger('click');
+    await flushPromises();
 
     expect(Number(productCount.text()))
       .toEqual(4);
