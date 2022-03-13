@@ -1,43 +1,64 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import ProductDetail from '@/components/Product/ProductDetail.vue';
 
+const testProduct = {
+  nameKr: '카페 라떼',
+  price: 5000,
+  isHot: true,
+  isNewProduct: true,
+  description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+  cupSizes: [
+    {
+      name: 'Short',
+      iconSize: 'text-sm',
+      optionNo: 1,
+    },
+    {
+      optionNo: 2,
+      name: 'Tall',
+      iconSize: 'text-md',
+    },
+  ],
+  category: 2,
+  options: [
+    {
+      name: '에스프레소 샷',
+      unitprice: 500,
+      baseQuantity: 1,
+      optionNo: 1,
+      quantity: 1,
+    }],
+};
+
+const mockGetProduct = jest.fn();
+jest.mock(
+  '@/components/Client/ProductRepository',
+  () => jest.fn()
+    .mockImplementation(() => ({
+      getProduct: jest.fn(() => ({
+        data: {
+          product: JSON.parse(JSON.stringify(testProduct)),
+        },
+      })),
+    })),
+);
+
 describe('음료 정보', () => {
   const wrapper = mount(ProductDetail, {
     data() {
       return {
-        product: {
-          nameKr: '카페 라떼',
-          price: 5000,
-          description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-          cupSizes: [
-            {
-              name: 'Short',
-              iconSize: 'text-sm',
-              optionNo: 1,
-            },
-            {
-              optionNo: 2,
-              name: 'Tall',
-              iconSize: 'text-md',
-            },
-          ],
-          category: 2,
-          options: [
-            {
-              name: '에스프레소 샷',
-              unitprice: 500,
-              count: 1,
-              baseQuantity: 1,
-              optionNo: 1,
-              quantity: 1,
-            }],
-        },
+        product: {},
         quantity: 1,
+        cupSize: 0,
+        temperature: '',
       };
     },
   });
 
   test('음료 이름을 보여준다.', () => {
+    mockGetProduct.mockResolvedValueOnce(
+      { data: { product: JSON.parse(JSON.stringify(testProduct)) } },
+    );
     const productName = wrapper.get('[data-test="product-name-kr"]');
 
     expect(productName.text())
@@ -62,87 +83,39 @@ describe('음료 정보', () => {
 });
 
 describe('음료 위첨자 표시', () => {
-  test('인기 메뉴 위첨자', () => {
+  test('인기 메뉴 위첨자', async () => {
     const wrapper = mount(ProductDetail, {
       data() {
         return {
-          product: {
-            nameKr: '카페 라떼',
-            price: 5000,
-            isHot: true,
-            isNewProduct: false,
-            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            cupSizes: [
-              {
-                name: 'Short',
-                iconSize: 'text-sm',
-                optionNo: 1,
-              },
-              {
-                optionNo: 2,
-                name: 'Tall',
-                iconSize: 'text-md',
-              },
-            ],
-            category: 2,
-            options: [
-              {
-                name: '에스프레소 샷',
-                unitprice: 500,
-                count: 1,
-                baseQuantity: 1,
-                optionNo: 1,
-                quantity: 1,
-              }],
-          },
+          product: {},
           quantity: 1,
+          cupSize: 0,
+          temperature: '',
         };
       },
     });
-
+    await mockGetProduct.mockResolvedValueOnce(
+      { data: { product: JSON.parse(JSON.stringify(testProduct)) } },
+    );
     expect(wrapper.get('[data-test="superscript-hot"]')
       .text())
       .toBe('Hot');
   });
 
-  test('신 메뉴 위첨자', () => {
+  test('신 메뉴 위첨자', async () => {
     const wrapper = mount(ProductDetail, {
       data() {
         return {
-          product: {
-            nameKr: '카페 라떼',
-            price: 5000,
-            isHot: true,
-            isNewProduct: true,
-            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            cupSizes: [
-              {
-                name: 'Short',
-                iconSize: 'text-sm',
-                optionNo: 1,
-              },
-              {
-                optionNo: 2,
-                name: 'Tall',
-                iconSize: 'text-md',
-              },
-            ],
-            category: 2,
-            options: [
-              {
-                name: '에스프레소 샷',
-                unitprice: 500,
-                count: 1,
-                baseQuantity: 1,
-                optionNo: 1,
-                quantity: 1,
-              }],
-          },
+          product: {},
           quantity: 1,
+          cupSize: 0,
+          temperature: '',
         };
       },
     });
-
+    await mockGetProduct.mockResolvedValueOnce(
+      { data: { product: JSON.parse(JSON.stringify(testProduct)) } },
+    );
     expect(wrapper.get('[data-test="superscript-new"]')
       .text())
       .toBe('New');
@@ -182,36 +155,10 @@ describe('컵 옵션 3가지', () => {
     wrapper = mount(ProductDetail, {
       data() {
         return {
-          product: {
-            nameKr: '카페 라떼',
-            price: 5000,
-            isHot: true,
-            isNewProduct: true,
-            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            cupSizes: [
-              {
-                name: 'Short',
-                iconSize: 'text-sm',
-                optionNo: 1,
-              },
-              {
-                optionNo: 2,
-                name: 'Tall',
-                iconSize: 'text-md',
-              },
-            ],
-            category: 2,
-            options: [
-              {
-                name: '에스프레소 샷',
-                unitprice: 500,
-                count: 1,
-                baseQuantity: 1,
-                optionNo: 1,
-                quantity: 1,
-              }],
-          },
+          product: {},
           quantity: 1,
+          cupSize: 0,
+          temperature: '',
         };
       },
     });
@@ -258,36 +205,10 @@ describe('음료 퍼스널 옵션', () => {
     wrapper = mount(ProductDetail, {
       data() {
         return {
-          product: {
-            nameKr: '카페 라떼',
-            price: 5000,
-            isHot: true,
-            isNewProduct: true,
-            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            cupSizes: [
-              {
-                name: 'Short',
-                iconSize: 'text-sm',
-                optionNo: 1,
-              },
-              {
-                optionNo: 2,
-                name: 'Tall',
-                iconSize: 'text-md',
-              },
-            ],
-            category: 2,
-            options: [
-              {
-                name: '에스프레소 샷',
-                unitprice: 500,
-                count: 1,
-                baseQuantity: 1,
-                optionNo: 1,
-                quantity: 1,
-              }],
-          },
+          product: {},
           quantity: 1,
+          cupSize: 0,
+          temperature: '',
         };
       },
     });
@@ -315,8 +236,7 @@ describe('음료 퍼스널 옵션', () => {
     const personalOptionCount = wrapper.get('[data-test="personal-option-count"]');
     const addOptionCount = wrapper.get('[data-test="add-option-quantity"]');
 
-    addOptionCount.trigger('click');
-    await wrapper.vm.$nextTick();
+    await addOptionCount.trigger('click');
     expect(Number(personalOptionCount.text()))
       .toEqual(2);
   });
@@ -326,52 +246,27 @@ describe('총 금액 계산', () => {
   let wrapper;
 
   beforeEach(() => {
+    jest.clearAllMocks();
     wrapper = mount(ProductDetail, {
       data() {
         return {
-          product: {
-            nameKr: '카페 라떼',
-            price: 5000,
-            isHot: true,
-            isNewProduct: true,
-            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            cupSizes: [
-              {
-                name: 'Short',
-                iconSize: 'text-sm',
-                optionNo: 1,
-              },
-              {
-                optionNo: 2,
-                name: 'Tall',
-                iconSize: 'text-md',
-              },
-            ],
-            category: 2,
-            options: [
-              {
-                name: '에스프레소 샷',
-                unitprice: 500,
-                count: 1,
-                baseQuantity: 1,
-                optionNo: 1,
-                quantity: 1,
-              }],
-          },
+          product: {},
           quantity: 1,
+          cupSize: 0,
+          temperature: '',
         };
       },
     });
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  test('1개 주문', () => {
+  test('1개 주문', async () => {
     const totalPrice = wrapper.get('[data-test="total-price"]');
     const orderCount = wrapper.get('[data-test="order-quantity"]');
+    console.log(testProduct);
 
+    await mockGetProduct.mockResolvedValueOnce(
+      { data: { product: JSON.parse(JSON.stringify(testProduct)) } },
+    );
     expect(Number(orderCount.text()))
       .toEqual(1);
 
@@ -380,6 +275,9 @@ describe('총 금액 계산', () => {
   });
 
   test('3개 주문', async () => {
+    await mockGetProduct.mockResolvedValueOnce(
+      { data: { product: JSON.parse(JSON.stringify(testProduct)) } },
+    );
     const totalPrice = wrapper.get('[data-test="total-price"]');
     const orderCount = wrapper.get('[data-test="order-quantity"]');
     const addOrderCount = wrapper.get('[data-test="add-order-quantity"]');
@@ -395,6 +293,9 @@ describe('총 금액 계산', () => {
   });
 
   test('3개 주문 + 옵션 1개 더 추가', async () => {
+    await mockGetProduct.mockResolvedValueOnce(
+      { data: { product: JSON.parse(JSON.stringify(testProduct)) } },
+    );
     const totalPrice = wrapper.get('[data-test="total-price"]');
     const orderCount = wrapper.get('[data-test="order-quantity"]');
     const addOrderCount = wrapper.get('[data-test="add-order-quantity"]');
@@ -417,42 +318,21 @@ describe('즐겨찾기, 담기, 주문하기 버튼', () => {
     wrapper = mount(ProductDetail, {
       data() {
         return {
-          product: {
-            nameKr: '카페 라떼',
-            price: 5000,
-            isHot: true,
-            isNewProduct: true,
-            description: '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-            cupSizes: [
-              {
-                name: 'Short',
-                iconSize: 'text-sm',
-                optionNo: 1,
-              },
-              {
-                optionNo: 2,
-                name: 'Tall',
-                iconSize: 'text-md',
-              },
-            ],
-            category: 2,
-            options: [
-              {
-                name: '에스프레소 샷',
-                unitprice: 500,
-                count: 1,
-                baseQuantity: 1,
-                optionNo: 1,
-                quantity: 1,
-              }],
-          },
+          product: {},
           quantity: 1,
+          cupSize: 0,
+          temperature: '',
         };
       },
     });
+
+    mockGetProduct.mockResolvedValueOnce(
+      { data: { product: JSON.parse(JSON.stringify(testProduct)) } },
+    );
   });
   afterEach(() => {
     jest.clearAllMocks();
+    mockGetProduct.mockClear();
   });
 
   test('담기 버튼이 보여진다', () => {
