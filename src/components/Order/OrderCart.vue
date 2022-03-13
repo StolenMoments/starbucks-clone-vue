@@ -77,6 +77,11 @@ export default {
       }
       return price;
     },
+    async getProducts() {
+      const response = await orderRepository.getProductsInCart();
+      this.$data.cart = response.data.cart;
+      this.$store.commit('setCart', response.data.cart);
+    },
   },
   computed: {
     getTotalPrice() {
@@ -89,9 +94,8 @@ export default {
       return totalPrice;
     },
   },
-  async mounted() {
-    const response = await orderRepository.getProductsInCart();
-    this.$data.cart = response.data.cart;
+  created() {
+    this.getProducts();
   },
 };
 </script>

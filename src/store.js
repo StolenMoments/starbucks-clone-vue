@@ -3,6 +3,7 @@ import { createStore } from 'vuex';
 export default createStore({
   state: {
     token: sessionStorage.getItem('token') || '',
+    cart: [],
   },
   getters: {
     getToken() {
@@ -12,6 +13,9 @@ export default createStore({
   mutations: {
     setToken(state, token) {
       state.token = token;
+    },
+    setCart(state, cart) {
+      state.cart = cart;
     },
   },
 });
