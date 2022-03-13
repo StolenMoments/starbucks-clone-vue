@@ -262,8 +262,6 @@ describe('총 금액 계산', () => {
   test('1개 주문', async () => {
     const totalPrice = wrapper.get('[data-test="total-price"]');
     const orderCount = wrapper.get('[data-test="order-quantity"]');
-    console.log(testProduct);
-
     await mockGetProduct.mockResolvedValueOnce(
       { data: { product: JSON.parse(JSON.stringify(testProduct)) } },
     );
