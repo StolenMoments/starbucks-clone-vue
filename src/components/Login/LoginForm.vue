@@ -54,22 +54,21 @@ export default {
     };
   },
   methods: {
-    doLogin() {
+    async doLogin() {
       const payload = {
         username: this.username,
         password: this.password,
       };
-      userRepository.login(payload)
-        .then((response) => {
-          const { data } = response;
-          const token = `${data.token_type} ${data.access_token}`;
-          sessionStorage.setItem('token', token);
-          this.$store.commit('setToken', token);
-          this.$router.push('/product?category=1');
-        })
-        .catch(() => {
-          this.toggleModal();
-        });
+      try {
+        const response = await userRepository.login(payload);
+        const { data } = response;
+        const token = `${data.token_type} ${data.access_token}`;
+        sessionStorage.setItem('token', token);
+        this.$store.commit('setToken', token);
+        await this.$router.push('/product?category=1');
+      } catch (err) {
+        this.toggleModal();
+      }
     },
     toggleModal() {
       this.isLoginFail = !this.isLoginFail;
