@@ -210,10 +210,7 @@ export default {
       return totalPrice;
     },
   },
-  async mounted() {
-    if (this.$store.state.token === '') {
-      await this.$router.push('/');
-    }
+  created() {
     let payload;
     if (this.$route) {
       payload = {
@@ -224,8 +221,10 @@ export default {
         productNo: 1,
       };
     }
-    const response = await productRepository.getProduct(payload);
-    this.$data.product = response.data.product;
+    productRepository.getProduct(payload)
+      .then((response) => {
+        this.$data.product = response.data.product;
+      });
   },
 };
 </script>
