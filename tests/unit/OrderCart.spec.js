@@ -1,5 +1,17 @@
 import OrderCart from '@/components/Order/OrderCart.vue';
 import { flushPromises, mount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+
+const store = createStore({
+  state: {
+    cart: [],
+  },
+  mutations: {
+    setCart(state, cart) {
+      state.cart = cart;
+    },
+  },
+});
 
 const testCartList = [
   {
@@ -97,6 +109,9 @@ describe('텍스트 렌더링 테스트', () => {
   });
 
   const wrapper = mount(OrderCart, {
+    global: {
+      plugins: [store],
+    },
     data() {
       return {
         cart: [],
@@ -223,6 +238,9 @@ describe('기능 테스트', () => {
   });
 
   const wrapper = mount(OrderCart, {
+    global: {
+      plugins: [store],
+    },
     data() {
       return {
         cart: [],
