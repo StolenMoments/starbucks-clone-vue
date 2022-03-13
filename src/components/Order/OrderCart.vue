@@ -26,7 +26,7 @@
           {{ addComma(getTotalPrice) }}
         </span>
       </div>
-      <button class="OrderButton" data-test="do-order">
+      <button class="OrderButton" @click="goPayment" data-test="do-order">
         주문하기
       </button>
     </footer>
@@ -81,6 +81,9 @@ export default {
       const response = await orderRepository.getProductsInCart();
       this.$data.cart = response.data.cart;
       this.$store.commit('setCart', response.data.cart);
+    },
+    goPayment() {
+      this.$router.push('/payment');
     },
   },
   computed: {
