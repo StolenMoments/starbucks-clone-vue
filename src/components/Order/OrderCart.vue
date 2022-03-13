@@ -81,6 +81,7 @@ export default {
       const response = await orderRepository.getProductsInCart();
       this.$data.cart = response.data.cart;
       this.$store.commit('setCart', response.data.cart);
+      sessionStorage.setItem('cart', JSON.stringify(response.data.cart));
     },
     goPayment() {
       this.$router.push('/payment');
