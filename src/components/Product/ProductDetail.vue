@@ -189,6 +189,20 @@ export default {
     setCupSize(size) {
       this.cupSize = size;
     },
+    async getProduct() {
+      let payload;
+      if (this.$route) {
+        payload = {
+          productNo: this.$route.params.id,
+        };
+      } else {
+        payload = {
+          productNo: 1,
+        };
+      }
+      const response = await productRepository.getProduct(payload);
+      this.$data.product = response.data.product;
+    },
   },
   computed: {
     getTotalPrice() {
@@ -211,20 +225,7 @@ export default {
     },
   },
   created() {
-    let payload;
-    if (this.$route) {
-      payload = {
-        productNo: this.$route.params.id,
-      };
-    } else {
-      payload = {
-        productNo: 1,
-      };
-    }
-    productRepository.getProduct(payload)
-      .then((response) => {
-        this.$data.product = response.data.product;
-      });
+    this.getProduct();
   },
 };
 </script>
