@@ -168,7 +168,7 @@ describe('음료 온도 선택 버튼', () => {
       .toBe('BUTTON');
 
     expect(iceButton.text())
-      .toBe('ICE');
+      .toBe('ICED');
   });
 });
 
