@@ -102,7 +102,9 @@
                 data-test="add-cart">
           담기
         </button>
-        <button class="h-10 w-24 cursor-pointer rounded border-2 bg-green-400" data-test="do-order">
+        <button class="h-10 w-24 cursor-pointer rounded border-2 bg-green-400"
+                @click="addToCart"
+                data-test="do-order">
           주문하기
         </button>
       </div>
