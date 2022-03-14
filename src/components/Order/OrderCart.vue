@@ -26,7 +26,9 @@
           {{ addComma(getTotalPrice) }}
         </span>
       </div>
-      <button class="OrderButton" @click="goPayment" data-test="do-order">
+      <button class="OrderButton"
+              :class="{'disabled': isEmpty}"
+              @click="goPayment" data-test="do-order">
         주문하기
       </button>
     </footer>
@@ -48,6 +50,7 @@ export default {
   data() {
     return {
       cart: [],
+      isEmpty: true,
     };
   },
   methods: {
@@ -82,9 +85,12 @@ export default {
       this.$data.cart = response.data.cart;
       this.$store.commit('setCart', response.data.cart);
       sessionStorage.setItem('cart', JSON.stringify(response.data.cart));
+      this.isEmpty = response.data.cart.length === 0;
     },
     goPayment() {
-      this.$router.push('/payment');
+      if (!this.isEmpty) {
+        this.$router.push('/payment');
+      }
     },
   },
   computed: {
