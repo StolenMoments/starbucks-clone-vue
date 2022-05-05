@@ -1,5 +1,5 @@
 <template>
-  <section @click="this.$emit('onToggleModal')" @keydown="this.$emit('onToggleModal')">
+  <section @click="onToggle" @keydown="onToggle">
     <section class="ModalBlock">
     </section>
     <section class="ModalContent">
@@ -12,6 +12,11 @@
 <script>
 export default {
   name: 'LoginFailModal',
+  methods: {
+    onToggle() {
+      this.$emit('onToggleModal');
+    },
+  },
 };
 </script>
 
