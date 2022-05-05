@@ -29,24 +29,6 @@ describe('기능 테스트', () => {
     jest.clearAllMocks();
   });
 
-  test('입력한 아이디를 보여준다.', async () => {
-    const inputUsername = wrapper.get('[data-test="input-username"]');
-    const showId = wrapper.get('[data-test="show-id"]');
-
-    await inputUsername.setValue('user1234');
-    expect(showId.text())
-      .toBe('user1234');
-  });
-
-  test('입력한 패스워드를 보여준다.', async () => {
-    const inputPassword = wrapper.get('[data-test="input-password"]');
-    const showPassword = wrapper.get('[data-test="show-password"]');
-
-    await inputPassword.setValue('password1234');
-    expect(showPassword.text())
-      .toBe('password1234');
-  });
-
   test('로그인 성공 테스트', async () => {
     const inputUsername = wrapper.get('[data-test="input-username"]');
     const inputPassword = wrapper.get('[data-test="input-password"]');

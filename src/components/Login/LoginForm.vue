@@ -25,14 +25,6 @@
         회원가입
       </button>
     </section>
-    <section>
-      <span>아이디:</span>
-      <span data-test="show-id">{{ username }}</span>
-    </section>
-    <section>
-      <span>패스워드:</span>
-      <span data-test="show-password">{{ password }}</span>
-    </section>
   </form>
   <LoginFailModal v-if="isLoginFail" v-on:onToggleModal="toggleModal"/>
 </template>
